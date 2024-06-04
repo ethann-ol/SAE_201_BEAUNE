@@ -26,8 +26,8 @@ namespace SAE_201_BEAUNE
 				if (value.Length > 2)
 					throw new ArgumentException("Le code club est trop long");
 				if (String.IsNullOrEmpty(value))
-					throw new ArgumentException("");
-				
+					throw new ArgumentException("Le code club ne peut pas etre vide");
+				this.code_club = value;
 				
 				code_club = value; }
 		}
