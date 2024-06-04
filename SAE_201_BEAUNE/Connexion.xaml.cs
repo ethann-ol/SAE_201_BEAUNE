@@ -18,7 +18,7 @@ namespace SAE_201_BEAUNE
     /// <summary>
     /// Logique d'interaction pour Connexion.xaml
     /// </summary>
-    public partial class Connexion : Page
+    public partial class Connexion : Window
     {
         public Connexion()
         {
