@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SAE_201_BEAUNE
 {
-    class Course
+    public class Course
+
     {
     }
 }
