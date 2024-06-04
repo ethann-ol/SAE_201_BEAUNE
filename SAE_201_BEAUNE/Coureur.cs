@@ -7,6 +7,8 @@ using System.Windows;
 
 namespace SAE_201_BEAUNE
 {
+    public enum SexeCoureur { Homme = 'H', Femme = 'F'};
+
     internal class Coureur
     {
 		private int num_courreur;
@@ -43,39 +45,65 @@ namespace SAE_201_BEAUNE
 		public string Nom_coureur
 		{
 			get { return nom_coureur; }
-			set { nom_coureur = value; }
+			set {
+                if (value.Length > 50)
+                    throw new ArgumentException("Le nom coureur est trop long");
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le nom coureur ne peut pas etre vide");
+                this.nom_coureur = value;
+			}
 		}
 		private string lien_photo;
 
 		public string Lien_photo
 		{
 			get { return lien_photo; }
-			set { lien_photo = value; }
+			set {
+                if (value.Length > 100)
+                    throw new ArgumentException("Le lien est trop long");
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le lien ne peut pas etre vide");
+                this.lien_photo = value;
+
+            }
 		}
 		private string prenom_coureur;
 
 		public string Prenom_coureur
 		{
 			get { return prenom_coureur; }
-			set { prenom_coureur = value; }
+			set {
+                if (value.Length > 50)
+                    throw new ArgumentException("Le prenom est trop long");
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le prenom ne peut pas etre vide");
+                this.prenom_coureur = value;
+            }
 		}
 		private string ville_coureur;
 
 		public string Ville_coureur
 		{
 			get { return ville_coureur; }
-			set { ville_coureur = value; }
+			set {
+                if (value.Length > 50)
+                    throw new ArgumentException("La ville est trop longue");
+                this.prenom_coureur = value;
+            }
 		}
 		private string portable;
 
 		public string Portable
 		{
 			get { return portable; }
-			set { portable = value; }
+			set {
+				if (value.Length != 10)
+					throw new ArgumentException("Le numero de telephone n'est pas correct");
+				portable = value; }
 		}
-		private string sexe;
+		private SexeCoureur sexe;
 
-		public string Sexe
+		public SexeCoureur Sexe
 		{
 			get { return sexe; }
 			set { sexe = value; }
@@ -85,10 +113,10 @@ namespace SAE_201_BEAUNE
 		public string Num_licence
 		{
 			get { return num_licence; }
-			set { num_licence = value; }
+			set {
+				if (value.Length != 10)
+					throw new ArgumentException("Le numero de licence est incorrect");
+				num_licence = value; }
 		}
-
-
-
 	}
 }
