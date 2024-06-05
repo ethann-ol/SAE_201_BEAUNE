@@ -17,7 +17,7 @@ namespace SAE_201_BEAUNE
         public class ApplicationData
         {
        
-            private ObservableCollection<Coureur> LesCourses = new ObservableCollection<Coureur>();
+            private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
             private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
@@ -85,7 +85,7 @@ namespace SAE_201_BEAUNE
         }
         public int Read()
         {
-            String sql = "SELECT id, nom,prenom,email,genre,telephone, dateNaissance FROM Client";
+            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
             try
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
@@ -93,8 +93,9 @@ namespace SAE_201_BEAUNE
                 dataAdapter.Fill(dataTable);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Course nouveau = new Course();
-                    //LesCourses.Add(nouveau);
+                    Course nouveau = new Course((int.Parse(res["num_course"].ToString())), (int.Parse(res["distance"].ToString())), res["heure_depart"].ToString(),
+                        (int.Parse(res["prix_inscription"].ToString())));
+                    LesCourses.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
