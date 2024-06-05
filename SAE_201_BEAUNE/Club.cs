@@ -8,6 +8,5 @@ namespace SAE_201_BEAUNE
 {
     public class Club
     {
-        private int
     }
 }

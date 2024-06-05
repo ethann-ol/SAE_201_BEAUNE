@@ -21,8 +21,17 @@ namespace SAE_201_BEAUNE
     /// </summary>
     public partial class Connexion : Window
     {
-        public Connexion()
+        private MainWindow mainWin;
+
+        public MainWindow MainWin
         {
+            get { return mainWin; }
+            set { mainWin = value; }
+        }
+
+        public Connexion(MainWindow mainWin)
+        {
+            this.MainWin = mainWin;
             InitializeComponent();
         }
 
@@ -39,11 +48,19 @@ namespace SAE_201_BEAUNE
                 if (Validation.GetHasError(uie))
                     ok = false;
             }
-            /* ne pas fermer la fenetre si mdp incorrecte */
-            ApplicationData connexion = new ApplicationData(nouveauAgent);
-            
+            ApplicationData connexion = new ApplicationData(nouveauAgent, this);
+            /************************************************//*
 
-            this.Close();
+            FAIRE S'OUVRIR LA FENETRE DE CONNEXION DEVANT LA MAINWINDOW
+
+
+            *//************************************************/
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Application.Current.Shutdown();
         }
     }
 }

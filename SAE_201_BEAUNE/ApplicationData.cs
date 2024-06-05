@@ -48,13 +48,15 @@ namespace SAE_201_BEAUNE
             }
         }
        
-	   public ApplicationData(Agent nouveauAgent)
+	   public ApplicationData(Agent nouveauAgent, Connexion connexionWin)
         {
            
-            this.ConnexionBD(nouveauAgent);
+            this.ConnexionBD(nouveauAgent, connexionWin);
         }
-        public void ConnexionBD(Agent nouveauAgent)
+        public void ConnexionBD(Agent nouveauAgent, Connexion connexionWin)
             {
+
+            bool pbconnexion = false;
             try
             {
                 Connexion = new NpgsqlConnection();
@@ -64,14 +66,22 @@ namespace SAE_201_BEAUNE
                                              "Search Path = Beaune;" +
                                              $"uid={nouveauAgent.Login_agent};" +
                                              $"password={nouveauAgent.Mdp_agent};";
+                Connexion.Open();
+                   
                 // à compléter dans les "" 
                 // @ sert à enlever tout pb avec les caractères 
-                Connexion.Open();
             }
             catch (Exception e)
             {
+
+                pbconnexion = true;
                 MessageBox.Show("pb de connexion : " + e);
+
                 // juste pour le debug : à transformer en MsgBox 
+            }
+            if (!pbconnexion)
+            {
+                connexionWin.MainWin.FenetreConnexion(false, connexionWin);
             }
         }
         
