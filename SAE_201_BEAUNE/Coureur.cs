@@ -9,14 +9,14 @@ namespace SAE_201_BEAUNE
 {
     public enum SexeCoureur { Homme = 'H', Femme = 'F'};
 
-    internal class Coureur
+    public class Coureur
     {
-		private int num_courreur;
+		private int num_coureur;
 
-		public int Num_courreur
+		public int Num_coureur
 		{
-			get { return num_courreur; }
-			set { num_courreur = value; }
+			get { return num_coureur; }
+			set { num_coureur = value; }
 		}
 
 		private string code_club;
@@ -118,10 +118,9 @@ namespace SAE_201_BEAUNE
 					throw new ArgumentException("Le numero de licence est incorrect");
 				num_licence = value; }
 		}
-
-        public Coureur(int num_courreur, string code_club, int num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, SexeCoureur sexe, string num_licence)
+        public Coureur(int num_coureur, string code_club, int num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, SexeCoureur sexe, string num_licence)
         {
-            this.Num_courreur = num_courreur;
+            this.Num_coureur = num_coureur;
             this.Code_club = code_club;
             this.Num_federation = num_federation;
             this.Nom_coureur = nom_coureur;
@@ -132,15 +131,14 @@ namespace SAE_201_BEAUNE
             this.Sexe = sexe;
             this.Num_licence = num_licence;
         }
-
-        public Coureur(int num_courreur, string code_club, int num_federation, string nom_coureur, string prenom_coureur, string portable)
+        public Coureur(int num_coureur, string code_club, int num_federation, string nom_coureur, string prenom_coureur, string portable)
         {
-            this.Num_courreur = num_courreur;
+            this.Num_coureur = num_coureur;
             this.Code_club = code_club;
             this.Num_federation = num_federation;
             this.Nom_coureur = nom_coureur;
             this.Prenom_coureur = prenom_coureur;
             this.Portable = portable;
         }
-    }
+	}
 }
