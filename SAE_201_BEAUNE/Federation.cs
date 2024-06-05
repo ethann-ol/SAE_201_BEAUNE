@@ -41,7 +41,9 @@ namespace SAE_201_BEAUNE
             set
             {
                 if (String.IsNullOrEmpty(value))
-                    throw new ArgumentNullException("Vous devez saisir un nom de fédération");
+                    throw new ArgumentNullException("Vous devez saisir un nom de fédération valide");
+                if (value.Length < 10)
+                    throw new ArgumentException("Le nom de fédération est trop long");
                 this.nom_federation = value;
             }
         }
