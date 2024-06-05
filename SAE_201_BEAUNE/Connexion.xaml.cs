@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,26 @@ namespace SAE_201_BEAUNE
         public Connexion()
         {
             InitializeComponent();
+        }
+
+        private void butConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            bool ok = true;
+            foreach (UIElement uie in stackConnexion.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+                if (Validation.GetHasError(uie))
+                    ok = false;
+            }
+            /* ne pas fermer la fenetre si mdp incorrecte */
+            ApplicationData connexion = new ApplicationData(nouveauAgent);
+            
+
+            this.Close();
         }
     }
 }

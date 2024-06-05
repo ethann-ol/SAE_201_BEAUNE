@@ -9,6 +9,18 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:Agent x:Name="nouveauAgent" />
+    </Window.DataContext>
     <Grid>
         <StackPanel x:Name="stackConnexion" HorizontalAlignment="Center">
             <Image
@@ -16,18 +28,31 @@
                 Width="150"
                 Height="150"
                 Source="/img/Logo-Semi-Beaune.png" />
-            <Label x:Name="labelID" Content="Identifiant" Margin="0,5,0,0"  Target="{Binding ElementName=textID, Mode=OneWay}"/>
+            <Label
+                x:Name="labelID"
+                Margin="0,5,0,0"
+                Content="Identifiant"
+                Target="{Binding ElementName=textID, Mode=OneWay}" />
             <TextBox
                 x:Name="textID"
-                Text="{Binding labelID}"
-                TextWrapping="Wrap" Margin="0,5,0,0" 
-                />
-            <Label x:Name="labMdp" Content="Mot de Passe" Margin="0,5,0,0" Target="{Binding ElementName=textMdp, Mode=OneWay}"/>
+                Margin="0,5,0,0"
+                Text="{Binding Login_agent, ValidatesOnExceptions=True}"
+                TextWrapping="Wrap" />
+            <Label
+                x:Name="labMdp"
+                Margin="0,5,0,0"
+                Content="Mot de Passe"
+                Target="{Binding ElementName=textMdp, Mode=OneWay}" />
             <TextBox
                 x:Name="textMdp"
-                Text="{Binding labMdp}"
-                TextWrapping="Wrap" Margin="0,5,0,0" />
-            <Button x:Name="butConnexion" Content="Connexion" Margin="0,20,0,0" />
+                Margin="0,5,0,0"
+                Text="{Binding Mdp_agent, ValidatesOnExceptions=True}"
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="butConnexion"
+                Margin="0,20,0,0"
+                Click="butConnexion_Click"
+                Content="Connexion" />
 
         </StackPanel>
 

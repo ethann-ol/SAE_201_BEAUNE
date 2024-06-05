@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Npgsql;
 
 namespace SAE_201_BEAUNE
@@ -21,19 +22,19 @@ namespace SAE_201_BEAUNE
             private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
-        /*public ObservableCollection<Coureur> lesCoureurs
+        public ObservableCollection<Course> lesCourses
         {
             get
             {
-                return this.lesCoureurs;
+                return this.lesCourses;
             }
 
             set
             {
-                this.lesCoureurs = value;
+                this.lesCourses = value;
             }
         }
-        */
+
        public NpgsqlConnection Connexion 
         {
             get
@@ -47,12 +48,12 @@ namespace SAE_201_BEAUNE
             }
         }
        
-	   public ApplicationData()
+	   public ApplicationData(Agent nouveauAgent)
         {
            
-            this.ConnexionBD();
+            this.ConnexionBD(nouveauAgent);
         }
-        public void ConnexionBD()
+        public void ConnexionBD(Agent nouveauAgent)
             {
             try
             {
@@ -61,15 +62,15 @@ namespace SAE_201_BEAUNE
                                              "port=5433;" +
                                              "Database=Beaune;" +
                                              "Search Path = Beaune;" +
-                                             "uid=stapleta;" +
-                                             "password=cx2EQm;";
+                                             $"uid={nouveauAgent.Login_agent};" +
+                                             $"password={nouveauAgent.Mdp_agent};";
                 // à compléter dans les "" 
                 // @ sert à enlever tout pb avec les caractères 
                 Connexion.Open();
             }
             catch (Exception e)
             {
-                Console.WriteLine("pb de connexion : " + e);
+                MessageBox.Show("pb de connexion : " + e);
                 // juste pour le debug : à transformer en MsgBox 
             }
         }

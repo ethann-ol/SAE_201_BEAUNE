@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAE_201_BEAUNE
 {
-    internal class Agent
+    public class Agent
     {
 		private int num_agent;
 
@@ -21,7 +21,7 @@ namespace SAE_201_BEAUNE
 		{
 			get { return login_agent; }
 			set {
-				if (value.Length != 6)
+				if (value.Length > 8)
 					throw new Exception("Le login n'est pas correct");
 				login_agent = value; }
 		}
@@ -36,11 +36,20 @@ namespace SAE_201_BEAUNE
 				mdp_agent = value; }
 		}
 
-        public Agent(int num_agent, string login_agent, string mdp_agent)
+        public Agent(string login_agent, string mdp_agent)
         {
-            this.Num_agent = num_agent;
             this.Login_agent = login_agent;
             this.Mdp_agent = mdp_agent;
+        }
+
+        public Agent()
+        {
+        }
+
+        public override string? ToString()
+        {
+            return $"ID: {this.Login_agent}" +
+				$"MDP: {this.Mdp_agent}";
         }
     }
 }
