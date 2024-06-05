@@ -30,7 +30,7 @@ namespace SAE_201_BEAUNE
 			get { return heure_depart; }
 			set { 
 				if (String.IsNullOrEmpty(value))
-					throw new ArgumentNullException("Vous devez saisir une heure de départ");
+					throw new ArgumentNullException("Vous devez saisir une heure de départ valide");
 				
 				
 				this.heure_depart = value; }
