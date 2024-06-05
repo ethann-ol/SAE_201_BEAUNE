@@ -27,7 +27,12 @@ namespace SAE_201_BEAUNE
 		public DateTime Date_inscription
 		{
 			get { return date_insription; }
-			set { date_insription = value; }
+			set { 
+				DateTime today =  DateTime.Today;
+				if (value <= today)
+					throw new ArgumentException("La date d'inscription n'est pas valide");
+				date_insription = value;
+			}
 		}
 
         public Inscription(int num_inscription, int num_course, DateTime date_inscription)
