@@ -120,8 +120,8 @@ namespace SAE_201_BEAUNE
                 dataAdapter.Fill(dataTable);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Course nouveau = new Course((int.Parse(res["num_course"].ToString())), (int.Parse(res["distance"].ToString())), res["heure_depart"].ToString(),
-                        (int.Parse(res["prix_inscription"].ToString())));
+                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
+                        int.Parse(res["prix_inscription"].ToString()));
                     LesCourses.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
@@ -140,8 +140,8 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), int.Parse(res["num_federation"].ToString()),
-                        res["nom_coureur"].ToString(), res["prenom_coureur"].ToString());
-                    LesCourses.Add(nouveau);
+                        res["nom_coureur"].ToString(), res["prenom_coureur"].ToString(), res["potable"].ToString());
+                    LesCoureurs.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
