@@ -8,6 +8,7 @@
     Title="Connexion"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Closing="Window_Closing"
     mc:Ignorable="d">
     <Window.Resources>
         <Style TargetType="TextBox">
@@ -19,7 +20,7 @@
         </Style>
     </Window.Resources>
     <Window.DataContext>
-        <local:Agent x:Name="nouveauAgent" />
+        <local:Agent x:Name="nouveauAgent"/>
     </Window.DataContext>
     <Grid>
         <StackPanel x:Name="stackConnexion" HorizontalAlignment="Center">
