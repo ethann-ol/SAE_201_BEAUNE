@@ -149,6 +149,29 @@ namespace SAE_201_BEAUNE
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
 
+        public int ReadDistance()
+        {
+            this.LesCourses = new ObservableCollection<Course>();
+            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
+            try
+            {
+                NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
+                        int.Parse(res["prix_inscription"].ToString()));
+                    LesCourses.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+
+
+
     }
     
 }
