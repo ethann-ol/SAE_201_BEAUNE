@@ -46,6 +46,10 @@ namespace SAE_201_BEAUNE
             this.Mdp_agent = mdp_agent;
         }
 
+        public Agent()
+        {
+        }
+
         public override string? ToString()
         {
             return $"ID: {this.Login_agent}" +
