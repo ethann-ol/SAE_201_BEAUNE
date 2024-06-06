@@ -16,11 +16,11 @@ using Npgsql;
 namespace SAE_201_BEAUNE
 {
 
-        public class ApplicationData
-        {
-       
-            private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
-            private ObservableCollection<Coureur> LesCoureurs = new ObservableCollection<Coureur>();
+    public class ApplicationData
+    {
+
+        private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
+        private ObservableCollection<Coureur> LesCoureurs = new ObservableCollection<Coureur>();
         private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
@@ -50,56 +50,45 @@ namespace SAE_201_BEAUNE
         }
 
 
-        public NpgsqlConnection Connexion 
+        public NpgsqlConnection Connexion
         {
             get
             {
-                return this.connexion ;
+                return this.connexion;
             }
 
             set
             {
-                this.connexion  = value;
+                this.connexion = value;
             }
         }
-       
-	   public ApplicationData(Agent nouveauAgent, Connexion connexionWin)
+        private Agent agentConnecter;
+
+        public Agent AgentConnecter
         {
-           
-            this.ConnexionBD(nouveauAgent, connexionWin);
+            get { return agentConnecter; }
+            set { agentConnecter = value; }
         }
-        public void ConnexionBD(Agent nouveauAgent, Connexion connexionWin)
-            {
+        private Connexion connexionWin;
 
-            bool pbconnexion = false;
-            try
-            {
-                Connexion = new NpgsqlConnection();
-                Connexion.ConnectionString = "Server=srv-peda-new;" +
-                                             "port=5433;" +
-                                             "Database=Beaune;" +
-                                             "Search Path = Beaune;" +
-                                             $"uid={nouveauAgent.Login_agent};" +
-                                             $"password={nouveauAgent.Mdp_agent};";
-                Connexion.Open();
-                   
-                // à compléter dans les "" 
-                // @ sert à enlever tout pb avec les caractères 
-            }
-            catch (Exception e)
-            {
-
-                pbconnexion = true;
-                MessageBox.Show("Votre mot de passe ou login est incorecte");
-
-                // juste pour le debug : à transformer en MsgBox 
-            }
-            if (!pbconnexion)
-            {
-                connexionWin.MainWin.FenetreConnexion(false, connexionWin);
-            }
+        public Connexion ConnexionWin
+        {
+            get { return connexionWin; }
+            set { connexionWin = value; }
         }
-        
+
+
+
+        public ApplicationData()
+        {
+        }
+
+        public bool TryConnexionBD(Agent agentConnecter)
+        {
+            DataAccess.AgentConnecter = agentConnecter;
+            return DataAccess.Instance.ConnexionBD();
+        }
+
         public void DeconnexionBD()
         {
             try
@@ -148,11 +137,11 @@ namespace SAE_201_BEAUNE
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
-
+        /*
         public int ReadDistance()
         {
             this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
+            String sql = "SELECT num_course, num_borne, nb_km FROM Distance";
             try
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
@@ -160,18 +149,15 @@ namespace SAE_201_BEAUNE
                 dataAdapter.Fill(dataTable);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
-                        int.Parse(res["prix_inscription"].ToString()));
-                    LesCourses.Add(nouveau);
+                    Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()) finir parsing
+                        );
+                    LesDistance.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
-
-
-
+*/
     }
-    
 }
