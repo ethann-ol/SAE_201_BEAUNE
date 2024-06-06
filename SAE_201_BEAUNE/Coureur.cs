@@ -15,39 +15,38 @@ namespace SAE_201_BEAUNE
 
 		public int Num_coureur
 		{
-			get { return num_coureur; }
-			set { num_coureur = value; }
+			get { return this.num_coureur; }
+			set { this.num_coureur = value; }
 		}
 
 		private string code_club;
 
 		public string Code_club
 		{
-			get { return code_club; }
+			get { return this.code_club; }
 			set {
 				if (value.Length > 2)
-					throw new ArgumentException("Le code club est trop long");
+					throw new ArgumentOutOfRangeException("Le code club est trop long");
 				if (String.IsNullOrEmpty(value))
 					throw new ArgumentException("Le code club ne peut pas etre vide");
 				this.code_club = value;
-				
-				code_club = value; }
+			}
 		}
 		private int num_federation;
 
 		public int Num_federation
 		{
-			get { return num_federation; }
-			set { num_federation = value; }
+			get { return this.num_federation; }
+			set { this.num_federation = value; }
 		}
 		private string nom_coureur;
 
 		public string Nom_coureur
 		{
-			get { return nom_coureur; }
+			get { return this.nom_coureur; }
 			set {
                 if (value.Length > 50)
-                    throw new ArgumentException("Le nom coureur est trop long");
+                    throw new ArgumentOutOfRangeException("Le nom coureur est trop long");
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentException("Le nom coureur ne peut pas etre vide");
                 this.nom_coureur = value;
@@ -57,10 +56,10 @@ namespace SAE_201_BEAUNE
 
 		public string Lien_photo
 		{
-			get { return lien_photo; }
+			get { return this.lien_photo; }
 			set {
                 if (value.Length > 100)
-                    throw new ArgumentException("Le lien est trop long");
+                    throw new ArgumentOutOfRangeException("Le lien est trop long");
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentException("Le lien ne peut pas etre vide");
                 this.lien_photo = value;
@@ -71,10 +70,10 @@ namespace SAE_201_BEAUNE
 
 		public string Prenom_coureur
 		{
-			get { return prenom_coureur; }
+			get { return this.prenom_coureur; }
 			set {
                 if (value.Length > 50)
-                    throw new ArgumentException("Le prenom est trop long");
+                    throw new ArgumentOutOfRangeException("Le prenom est trop long");
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentException("Le prenom ne peut pas etre vide");
                 this.prenom_coureur = value;
@@ -84,10 +83,10 @@ namespace SAE_201_BEAUNE
 
 		public string Ville_coureur
 		{
-			get { return ville_coureur; }
+			get { return this.ville_coureur; }
 			set {
                 if (value.Length > 50)
-                    throw new ArgumentException("La ville est trop longue");
+                    throw new ArgumentOutOfRangeException("La ville est trop longue");
                 this.prenom_coureur = value;
             }
 		}
@@ -95,28 +94,28 @@ namespace SAE_201_BEAUNE
 
 		public string Portable
 		{
-			get { return portable; }
+			get { return this.portable; }
 			set {
 				if (value.Length != 10)
 					throw new ArgumentException("Le numero de telephone n'est pas correct");
-				portable = value; }
+				this.portable = value; }
 		}
 		private SexeCoureur sexe;
 
 		public SexeCoureur Sexe
 		{
-			get { return sexe; }
-			set { sexe = value; }
+			get { return this.sexe; }
+			set { this.sexe = value; }
 		}
 		private string num_licence;
 
 		public string Num_licence
 		{
-			get { return num_licence; }
+			get { return this.num_licence; }
 			set {
 				if (value.Length != 10)
-					throw new ArgumentException("Le numero de licence est incorrect");
-				num_licence = value; }
+					throw new ArgumentOutOfRangeException("Le numero de licence est incorrect");
+				this.num_licence = value; }
 		}
         public Coureur(int num_coureur, string code_club, int num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, SexeCoureur sexe, string num_licence)
         {

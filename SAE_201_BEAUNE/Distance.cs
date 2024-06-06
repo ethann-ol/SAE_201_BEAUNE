@@ -44,6 +44,7 @@ namespace SAE_201_BEAUNE
             {
                 if (value < 1 || value > 5)
                     throw new ArgumentOutOfRangeException("Le num borne doit être compris entre 1 et 5");
+            
 
                 this.num_borne = value;
             }

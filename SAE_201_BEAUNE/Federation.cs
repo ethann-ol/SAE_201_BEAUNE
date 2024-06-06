@@ -22,7 +22,7 @@ namespace SAE_201_BEAUNE
         {
             get
             {
-                return num_federation;
+                return this.num_federation;
             }
 
             set
@@ -35,7 +35,7 @@ namespace SAE_201_BEAUNE
         {
             get
             {
-                return nom_federation;
+                return this.nom_federation;
             }
 
             set

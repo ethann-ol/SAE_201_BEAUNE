@@ -19,7 +19,7 @@
         </Style>
     </Window.Resources>
     <Window.DataContext>
-        <local:Agent x:Name="nouveauAgent" />
+        <local:Agent x:Name="nouveauAgent"/>
     </Window.DataContext>
     <Grid>
         <StackPanel x:Name="stackConnexion" HorizontalAlignment="Center">

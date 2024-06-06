@@ -12,7 +12,7 @@ namespace SAE_201_BEAUNE
 
 		public int Num_ami
 		{
-			get { return num_ami; }
+			get { return this.num_ami; }
 			set { this.num_ami = value; }
 		}
 

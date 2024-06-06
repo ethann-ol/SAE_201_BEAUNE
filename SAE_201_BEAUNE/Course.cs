@@ -13,21 +13,21 @@ namespace SAE_201_BEAUNE
 
 		public int Num_course
 		{
-			get { return num_course; }
+			get { return this.num_course; }
 			set { this.num_course = value; }
 		}
 		private int distance;
 
 		public int Distance
 		{
-			get { return distance; }
+			get { return this.distance; }
 			set { this.distance = value; }
 		}
 		private string heure_depart;
 
 		public string Heure_depart
 		{
-			get { return heure_depart; }
+			get { return this.heure_depart; }
 			set {
 				if (String.IsNullOrEmpty(value))
 					throw new ArgumentNullException("Vous devez saisir une heure de départ valide");
@@ -40,7 +40,7 @@ namespace SAE_201_BEAUNE
 
 		public int Prix_inscription
 		{
-			get { return prix_inscription; }
+			get { return this.prix_inscription; }
 			set { this.prix_inscription = value; }
 		}
 		public Course(int num_course, int distance, string heure_depart, int prix_inscription) 
