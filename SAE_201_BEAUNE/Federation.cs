@@ -27,7 +27,7 @@ namespace SAE_201_BEAUNE
 
             set
             {
-                num_federation = value;
+                this.num_federation = value;
             }
         }
 

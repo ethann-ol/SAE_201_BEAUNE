@@ -12,38 +12,38 @@ namespace SAE_201_BEAUNE
 
 		public int Num_agent
 		{
-			get { return num_agent; }
-			set { num_agent = value; }
+			get { return this.num_agent; }
+			set { this.num_agent = value; }
 		}
 		private string login_agent;
 
 		public string Login_agent
 		{
-			get { return login_agent; }
+			get { return this.login_agent; }
 			set {
 				if (value.Length > 8)
-					throw new Exception("Le login n'est pas correct");
-				login_agent = value; }
+					throw new Exception("Le login saisi dépasse le nombre de caractères autorisé");
+				if (String.IsNullOrEmpty(value))
+					throw new ArgumentNullException("Vous devez saisir un login valide");
+				this.login_agent = value; }
 		}
 		private string mdp_agent;
 
 		public string Mdp_agent
 		{
-			get { return mdp_agent; }
+			get { return this.mdp_agent; }
 			set {
 				if (value.Length > 20)
-					throw new Exception("Le mdp est trop long");
-				mdp_agent = value; }
+					throw new Exception("Le mot de passe saisi dépasse le nombre de caractères autorisé");
+				if (String.IsNullOrEmpty(value))
+					throw new ArgumentNullException("Vous devez saisir un mot de passe valide");
+				this.mdp_agent = value; }
 		}
 
         public Agent(string login_agent, string mdp_agent)
         {
             this.Login_agent = login_agent;
             this.Mdp_agent = mdp_agent;
-        }
-
-        public Agent()
-        {
         }
 
         public override string? ToString()
