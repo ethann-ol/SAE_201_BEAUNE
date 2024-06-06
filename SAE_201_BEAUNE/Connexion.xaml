@@ -19,7 +19,7 @@
         </Style>
     </Window.Resources>
     <Window.DataContext>
-        <local:Agent x:Name="nouveauAgent"/>
+        <local:Agent x:Name="nouveauAgent" />
     </Window.DataContext>
     <Grid>
         <StackPanel x:Name="stackConnexion" HorizontalAlignment="Center">
@@ -47,7 +47,9 @@
                 x:Name="textMdp"
                 Margin="0,5,0,0"
                 Text="{Binding Mdp_agent, ValidatesOnExceptions=True}"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap"
+                IsHitTestVisible="False"
+                />
             <Button
                 x:Name="butConnexion"
                 Margin="0,20,0,0"
