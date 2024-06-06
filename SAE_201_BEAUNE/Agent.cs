@@ -21,10 +21,10 @@ namespace SAE_201_BEAUNE
 		{
 			get { return this.login_agent; }
 			set {
-				if (value.Length > 8)
-					throw new ArgumentOutOfRangeException("Le login saisi dépasse le nombre de caractères autorisé");
 				if (String.IsNullOrEmpty(value))
 					throw new ArgumentNullException("Vous devez saisir un login valide");
+				if (value.Length > 8)
+					throw new ArgumentOutOfRangeException("Le login saisi dépasse le nombre de caractères autorisé");
 				this.login_agent = value; }
 		}
 		private string mdp_agent;

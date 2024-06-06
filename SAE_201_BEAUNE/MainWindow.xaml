@@ -10,6 +10,10 @@
     Height="450"
     Closing="Window_Closing"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <local:ApplicationData x:Name="data"/>
+    </Window.DataContext>
+    
     <Grid>
         <TabControl>
             <TabItem Header="TabItem">

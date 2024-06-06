@@ -48,7 +48,9 @@ namespace SAE_201_BEAUNE
                 if (Validation.GetHasError(uie))
                     ok = false;
             }
-            ApplicationData connexion = new ApplicationData(nouveauAgent, this);
+            ApplicationData applicationData = new ApplicationData();
+            if (applicationData.TryConnexionBD(nouveauAgent))
+                this.MainWin.FenetreConnexion(false, this);
 
         }
     }
