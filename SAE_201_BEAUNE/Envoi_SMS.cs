@@ -56,8 +56,8 @@ namespace SAE_201_BEAUNE
             {
              if (String.IsNullOrEmpty(value))
                 throw new ArgumentNullException("Vous devez saisir un numéro de téléphone valide");
-                if (value.Length < 10)
-                    throw new ArgumentOutOfRangeException("Le numéro de téléphone saisi dépasse le nombre de caractères autorisé");
+                if (value.Length != 10)
+                    throw new ArgumentOutOfRangeException("Le numéro de téléphone saisi doit posséder 10 caractères");
                 this.portable_sms = value;
             }
         }

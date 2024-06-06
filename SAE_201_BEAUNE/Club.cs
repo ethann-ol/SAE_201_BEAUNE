@@ -13,7 +13,7 @@ namespace SAE_201_BEAUNE
 
         public string Code_club
         {
-            get { return code_club; }
+            get { return this.code_club; }
             set
             {
                 if (value.Length > 2)
@@ -29,7 +29,7 @@ namespace SAE_201_BEAUNE
 
         public string Nom_club
         {
-            get { return nom_club; }
+            get { return this.nom_club; }
             set
             {
                 if (value.Length > 25)

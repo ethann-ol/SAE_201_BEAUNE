@@ -12,26 +12,26 @@ namespace SAE_201_BEAUNE
 
 		public int Num_inscription
 		{
-			get { return num_inscription; }
-			set { num_inscription = value; }
+			get { return this.num_inscription; }
+			set { this.num_inscription = value; }
 		}
 		private int num_course;
 
 		public int Num_course
 		{
-			get { return num_course; }
-			set { num_course = value; }
+			get { return this.num_course; }
+			set { this.num_course = value; }
 		}
 		private DateTime date_insription;
 
 		public DateTime Date_inscription
 		{
-			get { return date_insription; }
+			get { return this.date_insription; }
 			set { 
 				DateTime today =  DateTime.Today;
 				if (value <= today)
 					throw new ArgumentException("La date d'inscription n'est pas valide");
-				date_insription = value;
+				this.date_insription = value;
 			}
 		}
 
