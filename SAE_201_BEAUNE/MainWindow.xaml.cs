@@ -45,10 +45,12 @@ namespace SAE_201_BEAUNE
             if (ouvrir)
             {
                 appConnexion.Show();
+                this.Hide();
             }
             else if (!ouvrir)
             {
                 appConnexion.Hide();
+                this.Show();
             }
         }
     }
