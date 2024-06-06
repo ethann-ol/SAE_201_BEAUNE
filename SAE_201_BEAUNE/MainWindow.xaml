@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:SAE_201_BEAUNE"
         mc:Ignorable="d"
         Title="Course Beaune" Height="450" Width="800">
+    <Window.DataContext>
+        <local:ApplicationData x:Name="data" />
+    </Window.DataContext>
     <Grid>
         <TabControl>
             <TabItem Header="TabItem">
@@ -18,8 +21,18 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataCourse" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    <Image x:Name="logoImg" HorizontalAlignment="Left" Margin="199,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.06,0.001" Source="/img/Logo-Semi-Beaune.png" Grid.Column="1" Height="101" Grid.Row="1" Width="195"/>
+                    <DataGrid x:Name="dataCourse" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding LesCourses}" >
+                        <DataGrid.Columns >
+
+                            <DataGridTextColumn Header="Numéro Course" Binding="{Binding Num_course}" Width="80" />
+                            <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" Width="80" />
+                            <DataGridTextColumn Header="Heure Départ" Binding="{Binding Heure_depart}" Width="80" />
+                            <DataGridTextColumn Header="Prix" Binding="{Binding Prix_inscription}" Width="80" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <DataGrid x:Name="dataCoureur" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem">
