@@ -18,7 +18,13 @@ namespace SAE_201_BEAUNE
 
         public class ApplicationData
         {
-       
+            private ObservableCollection<Inscription2> LesInscriptions2 = new ObservableCollection<Inscription2>();
+            private ObservableCollection<Inscription> LesInscriptions = new ObservableCollection<Inscription>(); 
+            private ObservableCollection<Federation> LesFederations = new ObservableCollection<Federation>();
+            private ObservableCollection<Envoi_SMS> LesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+            private ObservableCollection<Club> LesClubs = new ObservableCollection<Club>();
+            private ObservableCollection<Amis> LesAmis = new ObservableCollection<Amis>();
+            private ObservableCollection<Distance> LesDistances = new ObservableCollection<Distance>();
             private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
             private ObservableCollection<Coureur> LesCoureurs = new ObservableCollection<Coureur>();
         private NpgsqlConnection connexion = null;   // futur lien à la BD
@@ -62,8 +68,99 @@ namespace SAE_201_BEAUNE
                 this.connexion  = value;
             }
         }
-       
-	   public ApplicationData(Agent nouveauAgent, Connexion connexionWin)
+
+        public ObservableCollection<Amis> lesAmis
+        {
+            get
+            {
+                return this.lesAmis;
+            }
+
+            set
+            {
+                this.lesAmis = value;
+            }
+        }
+
+        public ObservableCollection<Distance> lesDistances
+        {
+            get
+            {
+                return this.lesDistances;
+            }
+
+            set
+            {
+                this.lesDistances = value;
+            }
+        }
+
+        public ObservableCollection<Club> lesClubs
+        {
+            get
+            {
+                return this.lesClubs;
+            }
+
+            set
+            {
+                this.lesClubs = value;
+            }
+        }
+
+        public ObservableCollection<Envoi_SMS> lesEnvois_SMS
+        {
+            get
+            {
+                return this.lesEnvois_SMS;
+            }
+
+            set
+            {
+                this.lesEnvois_SMS = value;
+            }
+        }
+
+        public ObservableCollection<Federation> lesFederations
+        {
+            get
+            {
+                return this.lesFederations;
+            }
+
+            set
+            {
+                this.lesFederations = value;
+            }
+        }
+
+        public ObservableCollection<Inscription> lesInscriptions
+        {
+            get
+            {
+                return this.lesInscriptions;
+            }
+
+            set
+            {
+                this.lesInscriptions = value;
+            }
+        }
+
+        public ObservableCollection<Inscription2> lesInscriptions2
+        {
+            get
+            {
+                return this.lesInscriptions2;
+            }
+
+            set
+            {
+                this.lesInscriptions2 = value;
+            }
+        }
+
+        public ApplicationData(Agent nouveauAgent, Connexion connexionWin)
         {
            
             this.ConnexionBD(nouveauAgent, connexionWin);
