@@ -159,8 +159,6 @@ namespace SAE_201_BEAUNE
                 this.lesInscriptions2 = value;
             }
         }
-
-        public ApplicationData(Agent nouveauAgent, Connexion connexionWin)
         private Agent agentConnecter;
 
         public Agent AgentConnecter
