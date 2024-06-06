@@ -94,10 +94,29 @@ namespace SAE_201_BEAUNE
             catch (Exception e)
             { Console.WriteLine("pb à la déconnexion : " + e); }
         }
-        public int Read()
+        public int ReadCourse()
         {
             this.LesCourses = new ObservableCollection<Course>();
             String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
+            try
+            {
+                NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Course nouveau = new Course((int.Parse(res["num_course"].ToString())), (int.Parse(res["distance"].ToString())), res["heure_depart"].ToString(),
+                        (int.Parse(res["prix_inscription"].ToString())));
+                    LesCourses.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+        public int ReadCoureur()
+        {
+            String sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM Course";
             try
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);

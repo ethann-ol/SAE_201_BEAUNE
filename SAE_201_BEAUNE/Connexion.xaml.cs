@@ -57,10 +57,5 @@ namespace SAE_201_BEAUNE
             *//************************************************/
 
         }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //Application.Current.Shutdown();
-        }
     }
 }
