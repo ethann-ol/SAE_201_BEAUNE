@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace SAE_201_BEAUNE
 {
-    internal class SexeCoureurToBool : IValueConverter
+    public class SexeCoureurToBool : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

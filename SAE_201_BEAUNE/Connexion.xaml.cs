@@ -49,12 +49,6 @@ namespace SAE_201_BEAUNE
                     ok = false;
             }
             ApplicationData connexion = new ApplicationData(nouveauAgent, this);
-            /************************************************//*
-
-            FAIRE S'OUVRIR LA FENETRE DE CONNEXION DEVANT LA MAINWINDOW
-
-
-            *//************************************************/
 
         }
     }

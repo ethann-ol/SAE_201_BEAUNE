@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,8 @@ namespace SAE_201_BEAUNE
         {
        
             private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
-            private NpgsqlConnection connexion = null;   // futur lien à la BD
+            private ObservableCollection<Coureur> LesCoureurs = new ObservableCollection<Coureur>();
+        private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
         public ObservableCollection<Course> lesCourses
@@ -34,8 +36,21 @@ namespace SAE_201_BEAUNE
                 this.lesCourses = value;
             }
         }
+        public ObservableCollection<Coureur> lesCoureurs
+        {
+            get
+            {
+                return this.lesCoureurs;
+            }
 
-       public NpgsqlConnection Connexion 
+            set
+            {
+                this.lesCoureurs = value;
+            }
+        }
+
+
+        public NpgsqlConnection Connexion 
         {
             get
             {
@@ -75,7 +90,7 @@ namespace SAE_201_BEAUNE
             {
 
                 pbconnexion = true;
-                MessageBox.Show("pb de connexion : " + e);
+                MessageBox.Show("Votre mot de passe ou login est incorecte");
 
                 // juste pour le debug : à transformer en MsgBox 
             }
@@ -115,7 +130,7 @@ namespace SAE_201_BEAUNE
         }
         public int ReadCoureur()
         {
-            String sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM Course";
+            String sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
             try
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
@@ -123,8 +138,8 @@ namespace SAE_201_BEAUNE
                 dataAdapter.Fill(dataTable);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Course nouveau = new Course((int.Parse(res["num_course"].ToString())), (int.Parse(res["distance"].ToString())), res["heure_depart"].ToString(),
-                        (int.Parse(res["prix_inscription"].ToString())));
+                    Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), int.Parse(res["num_federation"].ToString()),
+                        res["nom_coureur"].ToString(), res["prenom_coureur"].ToString());
                     LesCourses.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
