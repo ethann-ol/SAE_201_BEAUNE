@@ -45,10 +45,10 @@ namespace SAE_201_BEAUNE
 		}
 		public Course(int num_course, int distance, string heure_depart, int prix_inscription) 
 		{ 
-			this.num_course = num_course;
-			this.distance = distance;
-			this.heure_depart = heure_depart;
-			this.prix_inscription = prix_inscription;
+			this.Num_course = num_course;
+			this.Distance = distance;
+			this.Heure_depart = heure_depart;
+			this.Prix_inscription = prix_inscription;
 
 		}
 
