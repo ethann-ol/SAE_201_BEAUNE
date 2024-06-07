@@ -32,12 +32,18 @@ namespace SAE_201_BEAUNE
 				this.code_club = value;
 			}
 		}
-		private int num_federation;
+		private string num_federation;
 
-		public int Num_federation
+		public string Num_federation
 		{
 			get { return this.num_federation; }
-			set { this.num_federation = value; }
+			set {
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentNullException("Vous devez saisir un numéro fédération valide");
+
+
+
+                this.num_federation = value; }
 		}
 		private string nom_coureur;
 
@@ -117,7 +123,7 @@ namespace SAE_201_BEAUNE
 					throw new ArgumentOutOfRangeException("Le numero de licence est incorrect");
 				this.num_licence = value; }
 		}
-        public Coureur(int num_coureur, string code_club, int num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, SexeCoureur sexe, string num_licence)
+        public Coureur(int num_coureur, string code_club, string num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, SexeCoureur sexe, string num_licence)
         {
             this.Num_coureur = num_coureur;
             this.Code_club = code_club;
@@ -130,7 +136,7 @@ namespace SAE_201_BEAUNE
             this.Sexe = sexe;
             this.Num_licence = num_licence;
         }
-        public Coureur(int num_coureur, string code_club, int num_federation, string nom_coureur, string prenom_coureur, string portable)
+        public Coureur(int num_coureur, string code_club, string num_federation, string nom_coureur, string prenom_coureur, string portable)
         {
             this.Num_coureur = num_coureur;
             this.Code_club = code_club;
