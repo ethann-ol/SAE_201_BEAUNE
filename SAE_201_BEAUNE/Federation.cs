@@ -9,16 +9,16 @@ namespace SAE_201_BEAUNE
 {
     public class Federation
     {
-        private int num_federation;
+        private string num_federation;
         private string nom_federation;
 
-        public Federation(int num_federation, string nom_federation)
+        public Federation(string num_federation, string nom_federation)
         {
             this.Num_federation = num_federation;
             this.Nom_federation = nom_federation;
         }
 
-        public int Num_federation
+        public string Num_federation
         {
             get
             {
@@ -27,6 +27,10 @@ namespace SAE_201_BEAUNE
 
             set
             {
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentNullException("Vous devez saisir un numéro fédération valide");
+
+
                 this.num_federation = value;
             }
         }

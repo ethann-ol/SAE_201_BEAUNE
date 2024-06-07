@@ -43,12 +43,43 @@ namespace SAE_201_BEAUNE
 			get { return this.prix_inscription; }
 			set { this.prix_inscription = value; }
 		}
-		public Course(int num_course, int distance, string heure_depart, int prix_inscription) 
+		private string nom_course;
+		public string Nom_course
+        {
+            get { return this.nom_course; }
+            set {
+				if (String.IsNullOrEmpty(value))
+					throw new ArgumentNullException("Le nom de course saisi n'est pas valide");
+
+				if (value.Length > 50)
+					throw new ArgumentOutOfRangeException("Le nom de course saisi dépasse le nombre de caractères autorisé");
+				
+				this.nom_course = value; }
+        }
+
+		private DateTime date_course;
+
+		public DateTime Date_course
+		{
+			get { return this.date_course; }
+			set {
+                DateTime today = DateTime.Today;
+                if (value < today)
+                    throw new ArgumentException("La date de course saisie n'est pas valide");
+
+
+                this.date_course = value; }
+		}
+	
+
+		public Course(int num_course, int distance, string heure_depart, int prix_inscription, string nom_course, DateTime date_course) 
 		{ 
 			this.Num_course = num_course;
 			this.Distance = distance;
 			this.Heure_depart = heure_depart;
 			this.Prix_inscription = prix_inscription;
+			this.Nom_course = nom_course;
+			this.Date_course = date_course;
 
 		}
 
