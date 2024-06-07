@@ -21,6 +21,7 @@ namespace SAE_201_BEAUNE
     /// </summary>
     public partial class Connexion : Window
     {
+        private bool closedByConnexion = false;
         private MainWindow mainWin;
 
         public MainWindow MainWin
@@ -50,8 +51,20 @@ namespace SAE_201_BEAUNE
             }
             ApplicationData applicationData = new ApplicationData();
             if (applicationData.TryConnexionBD(nouveauAgent))
+            {
                 this.MainWin.FenetreConnexion(false, this);
+                closedByConnexion=true;
+            }
 
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!closedByConnexion)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
