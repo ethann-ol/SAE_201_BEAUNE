@@ -16,17 +16,17 @@ using Npgsql;
 namespace SAE_201_BEAUNE
 {
 
-        public class ApplicationData
-        {
-            private ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
-            private ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
-            private ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
-            private ObservableCollection<Envoi_SMS> lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
-            private ObservableCollection<Club> lesClubs = new ObservableCollection<Club>();
-            private ObservableCollection<Amis> lesAmis = new ObservableCollection<Amis>();
-            private ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
-            private ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
-            private ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
+    public class ApplicationData
+    {
+        private ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
+        private ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
+        private ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
+        private ObservableCollection<Envoi_SMS> lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+        private ObservableCollection<Club> lesClubs = new ObservableCollection<Club>();
+        private ObservableCollection<Amis> lesAmis = new ObservableCollection<Amis>();
+        private ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
+        private ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
+        private ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
         private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
@@ -197,7 +197,7 @@ namespace SAE_201_BEAUNE
         public int ReadCourse()
         {
             this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course ";
+            String sql = "SELECT num_course, distance,heure_depart,prix_inscription, nom_course, date_course FROM Course";
             try
             {
                 
@@ -205,7 +205,7 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
-                        int.Parse(res["prix_inscription"].ToString()));
+                        int.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_inscription"].ToString()));
                     LesCourses.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
@@ -222,7 +222,7 @@ namespace SAE_201_BEAUNE
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), int.Parse(res["num_federation"].ToString()),
+                    Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), res["num_federation"].ToString(),
                         res["nom_coureur"].ToString(), res["prenom_coureur"].ToString(), res["potable"].ToString());
                     LesCoureurs.Add(nouveau);
                 }
@@ -310,7 +310,7 @@ namespace SAE_201_BEAUNE
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Federation nouveau = new Federation(int.Parse(res["num_federation"].ToString()), res["nom_federation"].ToString());
+                    Federation nouveau = new Federation(res["num_federation"].ToString(), res["nom_federation"].ToString());
                     LesFederations.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
