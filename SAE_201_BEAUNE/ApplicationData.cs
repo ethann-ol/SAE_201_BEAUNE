@@ -304,7 +304,7 @@ namespace SAE_201_BEAUNE
         public int ReadFederation()
         {
             this.LesFederations = new ObservableCollection<Federation>();
-            String sql = "SELECT num_federation, nom_federation FROM envoi_sms";
+            String sql = "SELECT num_federation, nom_federation FROM federation";
             try
             {
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
@@ -321,7 +321,7 @@ namespace SAE_201_BEAUNE
         public int ReadInscription()
         {
             this.LesInscriptions = new ObservableCollection<Inscription>();
-            String sql = "SELECT num_inscription, num_course, date_inscription FROM envoi_sms";
+            String sql = "SELECT num_inscription, num_course, date_inscription FROM inscription";
             try
             {
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
@@ -338,7 +338,7 @@ namespace SAE_201_BEAUNE
         public int ReadInscription2()
         {
             this.LesInscriptions2 = new ObservableCollection<Inscription2>();
-            String sql = "SELECT num_inscription, num_coureur, date_inscription FROM envoi_sms";
+            String sql = "SELECT num_inscription, num_coureur, date_inscription FROM inscription2";
             try
             {
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
