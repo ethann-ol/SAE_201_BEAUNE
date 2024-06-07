@@ -201,9 +201,8 @@ namespace SAE_201_BEAUNE
             String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
             try
             {
-                NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
+                
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
@@ -217,12 +216,11 @@ namespace SAE_201_BEAUNE
         }
         public int ReadCoureur()
         {
+            this.LesCoureurs = new ObservableCollection<Coureur>();
             String sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
             try
             {
-                NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), int.Parse(res["num_federation"].ToString()),
@@ -234,27 +232,76 @@ namespace SAE_201_BEAUNE
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
-        /*
         public int ReadDistance()
         {
-            this.LesCourses = new ObservableCollection<Course>();
+            this.LesDistances = new ObservableCollection<Distance>();
             String sql = "SELECT num_course, num_borne, nb_km FROM Distance";
             try
             {
-                NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, Connexion);
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()) finir parsing
-                        );
-                    LesDistance.Add(nouveau);
+                    Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()), int.Parse(res["num_borne"].ToString()), int.Parse(res["nb_km"].ToString()));
+                    LesDistances.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
-*/
+        public int ReadAmi()
+        {
+            this.LesAmis = new ObservableCollection<Amis>();
+            String sql = "SELECT num_ami FROM amis";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Amis nouveau = new Amis(int.Parse(res["num_ami"].ToString()));
+                    LesAmis.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+        public int ReadClub()
+        {
+            this.LesClubs = new ObservableCollection<Club>();
+            String sql = "SELECT code_club, nom_club FROM club";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Club nouveau = new Club(res["code_club"].ToString(), res["nom_club"].ToString());
+                    LesClubs.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+
+        public int ReadEnvoiSms()
+        {
+            this.LesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+            String sql = "SELECT num_ami, num_inscription, portable_sms FROM envoi_sms";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Envoi_SMS nouveau = new Envoi_SMS(int.Parse(res["num_ami"].ToString()), int.Parse(res["num_inscription"].ToString()), res["portable_sms"].ToString());
+                    LesEnvois_SMS.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+
+
     }
 }
