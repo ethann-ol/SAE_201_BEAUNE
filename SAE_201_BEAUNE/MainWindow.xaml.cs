@@ -35,6 +35,8 @@ namespace SAE_201_BEAUNE
 
             this.AppConnexion = new Connexion(this);
             FenetreConnexion(true, AppConnexion);
+            ApplicationData data = new ApplicationData();
+            data.ReadCourse();
 
 
 

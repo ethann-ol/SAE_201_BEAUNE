@@ -197,7 +197,7 @@ namespace SAE_201_BEAUNE
         public int ReadCourse()
         {
             this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course";
+            String sql = "SELECT num_course, distance,heure_depart,prix_inscription FROM Course ";
             try
             {
                 

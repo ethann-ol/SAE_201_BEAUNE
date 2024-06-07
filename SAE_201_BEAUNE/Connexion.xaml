@@ -26,7 +26,6 @@
         <StackPanel x:Name="stackConnexion" HorizontalAlignment="Center">
             <Image
                 x:Name="imgLogo"
-                Width="150"
                 Height="150"
                 Source="/img/Logo-Semi-Beaune.png" />
             <Label

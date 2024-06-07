@@ -11,28 +11,27 @@
     Closing="Window_Closing"
     mc:Ignorable="d">
     <Window.DataContext>
-        <local:ApplicationData x:Name="data"/>
+        <local:ApplicationData x:Name="data" />
     </Window.DataContext>
-    
+
     <Grid>
         <TabControl>
-            <TabItem Header="TabItem">
+            <TabItem Header="Inscrire Course">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="138*" />
+                        <ColumnDefinition Width="259*" />
                     </Grid.ColumnDefinitions>
                     <Image
                         x:Name="logoImg"
                         Grid.Row="1"
-                        Grid.Column="1"
                         Width="195"
                         Height="101"
-                        Margin="199,102,0,0"
+                        Margin="0,102,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         RenderTransformOrigin="0.06,0.001"
@@ -41,31 +40,36 @@
                         x:Name="dataCourse"
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding Connexion}">
+                        ItemsSource="{Binding LesCourses}">
                         <DataGrid.Columns>
 
-                            <DataGridTextColumn
-                                Width="80"
-                                Binding="{Binding Num_course}"
-                                Header="Numéro Course" />
-                            <DataGridTextColumn
-                                Width="80"
-                                Binding="{Binding Distance}"
-                                Header="Distance" />
-                            <DataGridTextColumn
-                                Width="80"
-                                Binding="{Binding Heure_depart}"
-                                Header="Heure Départ" />
-                            <DataGridTextColumn
-                                Width="80"
-                                Binding="{Binding Prix_inscription}"
-                                Header="Prix" />
+                            <DataGridTextColumn Binding="{Binding Num_course}" Header="NumCourse" />
+                            <DataGridTextColumn Binding="{Binding Nom_course}" Header="NomCourse" />
+                            <DataGridTextColumn Binding="{Binding Distance}" Header="Distance" />
+                            <DataGridTextColumn Binding="{Binding Heure_depart}" Header="Heure" />
+                            <DataGridTextColumn Binding="{Binding Prix_inscription}" Header="Prix" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid
                         x:Name="dataCoureur"
                         Grid.Column="1"
-                        d:ItemsSource="{d:SampleData ItemCount=5}" />
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding LesCoureurs}">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Binding="{Binding Num_coureur}" Header="Numéro Coureur" />
+                            <DataGridTextColumn Binding="{Binding Code_club}" Header="Code Club" />
+                            <DataGridTextColumn Binding="{Binding Num_federation}" Header="Fédération" />
+                            <DataGridTextColumn Binding="{Binding Nom_coureur}" Header="Nom" />
+                            <DataGridTextColumn Binding="{Binding Lien_photo}" Header="Photo" />
+                            <DataGridTextColumn Binding="{Binding Prenom_coureur}" Header="Prénom" />
+                            <DataGridTextColumn Binding="{Binding Ville_coureur}" Header="Ville" />
+                            <DataGridTextColumn Binding="{Binding Portable}" Header="Portable" />
+                            <DataGridTextColumn Binding="{Binding Sexe}" Header="Sexe" />
+                            <DataGridTextColumn Binding="{Binding Num_licence}" Header="Licence" />
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
             </TabItem>
