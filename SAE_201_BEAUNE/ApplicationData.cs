@@ -197,7 +197,7 @@ namespace SAE_201_BEAUNE
         public int ReadCourse()
         {
             this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription, num_course, date_course FROM Course";
+            String sql = "SELECT num_course, distance,heure_depart,prix_inscription, nom_course, date_course FROM Course";
             try
             {
                 
@@ -205,7 +205,7 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
-                        int.Parse(res["prix_inscription"].ToString()), int.Parse(res["num_course"].ToString(), DateTime.Parse(res["date_inscription"].ToString()));
+                        int.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_inscription"].ToString()));
                     LesCourses.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
