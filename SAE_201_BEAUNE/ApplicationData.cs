@@ -318,7 +318,23 @@ namespace SAE_201_BEAUNE
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
-
+        public int ReadInscription()
+        {
+            this.LesInscriptions = new ObservableCollection<Inscription>();
+            String sql = "SELECT num_inscription, num_course, date_inscription FROM envoi_sms";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
+                    LesInscriptions.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
 
 
     }
