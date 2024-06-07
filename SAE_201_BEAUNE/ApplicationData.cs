@@ -18,19 +18,19 @@ namespace SAE_201_BEAUNE
 
         public class ApplicationData
         {
-            private ObservableCollection<Inscription2> LesInscriptions2 = new ObservableCollection<Inscription2>();
-            private ObservableCollection<Inscription> LesInscriptions = new ObservableCollection<Inscription>(); 
-            private ObservableCollection<Federation> LesFederations = new ObservableCollection<Federation>();
-            private ObservableCollection<Envoi_SMS> LesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
-            private ObservableCollection<Club> LesClubs = new ObservableCollection<Club>();
-            private ObservableCollection<Amis> LesAmis = new ObservableCollection<Amis>();
-            private ObservableCollection<Distance> LesDistances = new ObservableCollection<Distance>();
-            private ObservableCollection<Course> LesCourses = new ObservableCollection<Course>();
-            private ObservableCollection<Coureur> LesCoureurs = new ObservableCollection<Coureur>();
+            private ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
+            private ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
+            private ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
+            private ObservableCollection<Envoi_SMS> lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+            private ObservableCollection<Club> lesClubs = new ObservableCollection<Club>();
+            private ObservableCollection<Amis> lesAmis = new ObservableCollection<Amis>();
+            private ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
+            private ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
+            private ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
         private NpgsqlConnection connexion = null;   // futur lien à la BD
 
 
-        public ObservableCollection<Course> lesCourses
+        public ObservableCollection<Course> LesCourses
         {
             get
             {
@@ -42,7 +42,7 @@ namespace SAE_201_BEAUNE
                 this.lesCourses = value;
             }
         }
-        public ObservableCollection<Coureur> lesCoureurs
+        public ObservableCollection<Coureur> LesCoureurs
         {
             get
             {
@@ -54,7 +54,6 @@ namespace SAE_201_BEAUNE
                 this.lesCoureurs = value;
             }
         }
-
 
         public NpgsqlConnection Connexion
         {
@@ -69,7 +68,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Amis> lesAmis
+        public ObservableCollection<Amis> LesAmis
         {
             get
             {
@@ -82,7 +81,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Distance> lesDistances
+        public ObservableCollection<Distance> LesDistances
         {
             get
             {
@@ -95,7 +94,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Club> lesClubs
+        public ObservableCollection<Club> LesClubs
         {
             get
             {
@@ -108,7 +107,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Envoi_SMS> lesEnvois_SMS
+        public ObservableCollection<Envoi_SMS> LesEnvois_SMS
         {
             get
             {
@@ -121,7 +120,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Federation> lesFederations
+        public ObservableCollection<Federation> LesFederations
         {
             get
             {
@@ -134,7 +133,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Inscription> lesInscriptions
+        public ObservableCollection<Inscription> LesInscriptions
         {
             get
             {
@@ -147,7 +146,7 @@ namespace SAE_201_BEAUNE
             }
         }
 
-        public ObservableCollection<Inscription2> lesInscriptions2
+        public ObservableCollection<Inscription2> LesInscriptions2
         {
             get
             {
@@ -234,7 +233,7 @@ namespace SAE_201_BEAUNE
         }
         public int ReadDistance()
         {
-            this.LesDistances = new ObservableCollection<Distance>();
+            this.lesDistances = new ObservableCollection<Distance>();
             String sql = "SELECT num_course, num_borne, nb_km FROM Distance";
             try
             {
@@ -242,7 +241,7 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()), int.Parse(res["num_borne"].ToString()), int.Parse(res["nb_km"].ToString()));
-                    LesDistances.Add(nouveau);
+                    lesDistances.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
@@ -251,7 +250,7 @@ namespace SAE_201_BEAUNE
         }
         public int ReadAmi()
         {
-            this.LesAmis = new ObservableCollection<Amis>();
+            this.lesAmis = new ObservableCollection<Amis>();
             String sql = "SELECT num_ami FROM amis";
             try
             {
@@ -259,7 +258,7 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Amis nouveau = new Amis(int.Parse(res["num_ami"].ToString()));
-                    LesAmis.Add(nouveau);
+                    lesAmis.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
@@ -268,7 +267,7 @@ namespace SAE_201_BEAUNE
         }
         public int ReadClub()
         {
-            this.LesClubs = new ObservableCollection<Club>();
+            this.lesClubs = new ObservableCollection<Club>();
             String sql = "SELECT code_club, nom_club FROM club";
             try
             {
@@ -276,7 +275,7 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Club nouveau = new Club(res["code_club"].ToString(), res["nom_club"].ToString());
-                    LesClubs.Add(nouveau);
+                    lesClubs.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
@@ -286,7 +285,7 @@ namespace SAE_201_BEAUNE
 
         public int ReadEnvoiSms()
         {
-            this.LesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+            this.lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
             String sql = "SELECT num_ami, num_inscription, portable_sms FROM envoi_sms";
             try
             {
@@ -294,7 +293,59 @@ namespace SAE_201_BEAUNE
                 foreach (DataRow res in dataTable.Rows)
                 {
                     Envoi_SMS nouveau = new Envoi_SMS(int.Parse(res["num_ami"].ToString()), int.Parse(res["num_inscription"].ToString()), res["portable_sms"].ToString());
-                    LesEnvois_SMS.Add(nouveau);
+                    lesEnvois_SMS.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+        
+        public int ReadFederation()
+        {
+            this.LesFederations = new ObservableCollection<Federation>();
+            String sql = "SELECT num_federation, nom_federation FROM federation";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Federation nouveau = new Federation(int.Parse(res["num_federation"].ToString()), res["nom_federation"].ToString());
+                    LesFederations.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+        public int ReadInscription()
+        {
+            this.LesInscriptions = new ObservableCollection<Inscription>();
+            String sql = "SELECT num_inscription, num_course, date_inscription FROM inscription";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
+                    LesInscriptions.Add(nouveau);
+                }
+                return dataTable.Rows.Count;
+            }
+            catch (NpgsqlException e)
+            { Console.WriteLine("pb de requete : " + e); return 0; }
+        }
+        public int ReadInscription2()
+        {
+            this.LesInscriptions2 = new ObservableCollection<Inscription2>();
+            String sql = "SELECT num_inscription, num_coureur, date_inscription FROM inscription2";
+            try
+            {
+                DataTable dataTable = DataAccess.Instance.GetData(sql);
+                foreach (DataRow res in dataTable.Rows)
+                {
+                    Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
+                    LesInscriptions2.Add(nouveau);
                 }
                 return dataTable.Rows.Count;
             }
