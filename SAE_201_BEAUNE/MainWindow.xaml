@@ -41,7 +41,7 @@
                         x:Name="dataCourse"
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding LesCourses}">
+                        ItemsSource="{Binding Connexion}">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn
