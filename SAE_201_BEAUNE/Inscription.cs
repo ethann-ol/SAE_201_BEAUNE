@@ -8,11 +8,15 @@ namespace SAE_201_BEAUNE
 {
     public class Inscription
     {
-		private int num_inscription;
+		public int NumCoureur;
+		public TimeSpan TempsPrevu;
+		private  int num_inscription;
+		private static int id = 0;
+		
 
 		public int Num_inscription
 		{
-			get { return this.num_inscription; }
+			get { return num_inscription; }
 			set { this.num_inscription = value; }
 		}
 		private int num_course;
@@ -34,17 +38,21 @@ namespace SAE_201_BEAUNE
 				this.date_insription = value;
 			}
 		}
-
-        public Inscription(int num_inscription, int num_course, DateTime date_inscription)
+        public Inscription()
         {
-            this.Num_inscription = num_inscription;
+        }
+        public Inscription(int num_course, DateTime date_inscription)
+        {
+			this.num_inscription = id++;
             this.Num_course = num_course;
             this.Date_inscription = date_inscription;
         }
-        public Inscription(int num_inscription, int num_course)
+
+        public Inscription(int num_inscription, int num_course, DateTime date_inscription)
         {
-            this.Num_inscription = num_inscription;
-            this.Num_course = num_course;
+            Num_inscription = num_inscription;
+            Num_course = num_course;
+            Date_inscription = date_inscription;
         }
     }
 }

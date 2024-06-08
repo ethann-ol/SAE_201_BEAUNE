@@ -12,6 +12,10 @@ namespace SAE_201_BEAUNE
         private int num_coureur;
         private TimeSpan temps_prevu;
 
+        public Inscription2()
+        {
+        }
+
         public Inscription2(int num_inscription, int num_coureur, TimeSpan temps_prevu)
         {
             this.Num_inscription = num_inscription;
@@ -57,5 +61,6 @@ namespace SAE_201_BEAUNE
                 this.temps_prevu = value;
             }
         }
+
     }
 }

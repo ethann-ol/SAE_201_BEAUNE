@@ -66,5 +66,18 @@ namespace SAE_201_BEAUNE
         {
             Application.Current.Shutdown();
         }
+
+        private void butInscrire_Click(object sender, RoutedEventArgs e)
+        {
+           Inscription inscription = new Inscription();
+            
+
+        }
+
+        private void butAjouter_Click(object sender, RoutedEventArgs e)
+        {
+            InscriptionCourse inscriptionApp = new InscriptionCourse();
+            inscriptionApp.ShowDialog();
+        }
     }
 }

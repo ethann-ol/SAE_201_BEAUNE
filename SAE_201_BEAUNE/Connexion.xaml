@@ -45,7 +45,6 @@
             <TextBox
                 x:Name="textMdp"
                 Margin="0,5,0,0"
-                IsHitTestVisible="False"
                 Text="{Binding Password, ValidatesOnExceptions=True}"
                 TextWrapping="Wrap" />
             <Button

@@ -138,5 +138,12 @@ namespace SAE_201_BEAUNE
             this.Prenom_coureur = prenom_coureur;
             this.Portable = portable;
         }
-	}
+
+        public Coureur(int num_coureur, string code_club, string num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, string num_licence) : this(num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur)
+        {
+            Ville_coureur = ville_coureur;
+            Portable = portable;
+            Num_licence = num_licence;
+        }
+    }
 }

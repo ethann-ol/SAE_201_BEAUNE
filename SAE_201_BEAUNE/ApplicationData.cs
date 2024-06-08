@@ -89,10 +89,14 @@ namespace SAE_201_BEAUNE
             sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), res["num_federation"].ToString(),
-                        res["nom_coureur"].ToString(), res["prenom_coureur"].ToString(), res["potable"].ToString());
+                Console.WriteLine(res["potable"]);
+                Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()),
+                        res["code_club"].ToString(), res["num_federation"].ToString(),
+                        res["nom_coureur"].ToString(), 
+                        res["prenom_coureur"].ToString(),
+                        res["potable"].ToString());
                 LesCoureurs.Add(nouveau);
-            }
+            } 
             sql = "SELECT num_course, num_borne, nb_km FROM Distance";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
@@ -123,10 +127,10 @@ namespace SAE_201_BEAUNE
                 Federation nouveau = new Federation(res["num_federation"].ToString(), res["nom_federation"].ToString());
                 LesFederations.Add(nouveau);
             }
-            sql = "SELECT num_inscription, num_course, date_inscription FROM inscription";
+            sql = "SELECT num_inscription,num_course, date_inscription FROM inscription";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
+                Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_course"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
                 LesInscriptions.Add(nouveau);
             }
             sql = "SELECT num_inscription, num_coureur, temps_prevu FROM inscription2";
@@ -136,5 +140,15 @@ namespace SAE_201_BEAUNE
                 LesInscriptions2.Add(nouveau);
             }
         }  
+        public static void CreateInscription(Inscription i, Inscription2 i2)
+        {
+            int nb;
+            string sql = $"insert into inscription (num_course,date_inscription)"
+            + $" values ('{i.Num_course}','{i.Date_inscription}');";
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+            sql = $"insert into inscription2 (num_course,date_inscription)"
+            + $" values ('{i.Num_course}','{i.Date_inscription}');";
+            NpgsqlCommand cmd2 = new NpgsqlCommand(sql,DataAccess.Instance.Connexion);
+        }
     }
 }
