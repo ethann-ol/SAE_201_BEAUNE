@@ -21,44 +21,24 @@ namespace SAE_201_BEAUNE
     /// </summary>
     public partial class Connexion : Window
     {
-        private bool closedByConnexion = false;
-        private MainWindow mainWin;
+        public static bool closedByConnexion = false;
 
-        public MainWindow MainWin
+        public Connexion()
         {
-            get { return mainWin; }
-            set { mainWin = value; }
-        }
-
-        public Connexion(MainWindow mainWin)
-        {
-            this.MainWin = mainWin;
             InitializeComponent();
         }
 
         private void butConnexion_Click(object sender, RoutedEventArgs e)
         {
-            bool ok = true;
-            foreach (UIElement uie in stackConnexion.Children)
+            if (ApplicationData.TryConnexionBD())
             {
-                if (uie is TextBox)
-                {
-                    TextBox txt = (TextBox)uie;
-                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                }
-                if (Validation.GetHasError(uie))
-                    ok = false;
-            }
-            ApplicationData applicationData = new ApplicationData();
-            if (applicationData.TryConnexionBD(nouveauAgent))
-            {
-                this.MainWin.FenetreConnexion(false, this);
-                closedByConnexion=true;
+                Connexion.closedByConnexion = true;
+                this.Close();
             }
 
 
         }
-
+        /*
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!closedByConnexion)
@@ -66,5 +46,6 @@ namespace SAE_201_BEAUNE
                 Application.Current.Shutdown();
             }
         }
+        */
     }
 }

@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:SAE_201_BEAUNE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Course Beaune"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="600"
     Closing="Window_Closing"
     mc:Ignorable="d">
     <Window.DataContext>
@@ -23,8 +23,8 @@
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="138*" />
-                        <ColumnDefinition Width="259*" />
+                        <ColumnDefinition Width="239*" />
+                        <ColumnDefinition Width="358*" />
                     </Grid.ColumnDefinitions>
                     <Image
                         x:Name="logoImg"
@@ -38,38 +38,18 @@
                         Source="/img/Logo-Semi-Beaune.png" />
                     <DataGrid
                         x:Name="dataCourse"
-                        AutoGenerateColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCourses}">
-                        <DataGrid.Columns>
-
-                            <DataGridTextColumn Binding="{Binding Num_course}" Header="NumCourse" />
-                            <DataGridTextColumn Binding="{Binding Nom_course}" Header="NomCourse" />
-                            <DataGridTextColumn Binding="{Binding Distance}" Header="Distance" />
-                            <DataGridTextColumn Binding="{Binding Heure_depart}" Header="Heure" />
-                            <DataGridTextColumn Binding="{Binding Prix_inscription}" Header="Prix" />
-                        </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid
                         x:Name="dataCoureur"
                         Grid.Column="1"
-                        AutoGenerateColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCoureurs}">
-                        <DataGrid.Columns>
-
-                            <DataGridTextColumn Binding="{Binding Num_coureur}" Header="Numéro Coureur" />
-                            <DataGridTextColumn Binding="{Binding Code_club}" Header="Code Club" />
-                            <DataGridTextColumn Binding="{Binding Num_federation}" Header="Fédération" />
-                            <DataGridTextColumn Binding="{Binding Nom_coureur}" Header="Nom" />
-                            <DataGridTextColumn Binding="{Binding Lien_photo}" Header="Photo" />
-                            <DataGridTextColumn Binding="{Binding Prenom_coureur}" Header="Prénom" />
-                            <DataGridTextColumn Binding="{Binding Ville_coureur}" Header="Ville" />
-                            <DataGridTextColumn Binding="{Binding Portable}" Header="Portable" />
-                            <DataGridTextColumn Binding="{Binding Sexe}" Header="Sexe" />
-                            <DataGridTextColumn Binding="{Binding Num_licence}" Header="Licence" />
-                        </DataGrid.Columns>
                     </DataGrid>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Label Content="Pour inscrire Veuillez saisir une course et un coureur."/>
+                    </StackPanel>
 
                 </Grid>
             </TabItem>

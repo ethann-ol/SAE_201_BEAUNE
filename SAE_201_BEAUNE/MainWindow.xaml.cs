@@ -31,21 +31,25 @@ namespace SAE_201_BEAUNE
 
         public MainWindow()
         {
+            Connexion connexionWindow = new Connexion();
+            connexionWindow.ShowDialog();
+            if (!Connexion.closedByConnexion)
+            {
+                Environment.Exit(0);
+            }
             InitializeComponent();
-
-            this.AppConnexion = new Connexion(this);
-            FenetreConnexion(true, AppConnexion);
-            ApplicationData data = new ApplicationData();
-            data.ReadCourse();
+            ApplicationData.ReadCourse();
 
 
 
 
         }
+        /*
         public void FenetreConnexion(bool ouvrir, Connexion appConnexion)
         {
             if (ouvrir)
             {
+                
                 appConnexion.Show();
                 this.Hide();
             }
@@ -53,9 +57,11 @@ namespace SAE_201_BEAUNE
             {
                 appConnexion.Hide();
                 this.Show();
+                data.ReadCourse();
+                data.ReadCoureur();
             }
         }
-
+        */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();

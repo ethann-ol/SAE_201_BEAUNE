@@ -18,341 +18,123 @@ namespace SAE_201_BEAUNE
 
     public class ApplicationData
     {
-        private ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
-        private ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
-        private ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
-        private ObservableCollection<Envoi_SMS> lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
-        private ObservableCollection<Club> lesClubs = new ObservableCollection<Club>();
-        private ObservableCollection<Amis> lesAmis = new ObservableCollection<Amis>();
-        private ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
-        private ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
-        private ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
-        private NpgsqlConnection connexion = null;   // futur lien à la BD
-
-
-        public ObservableCollection<Course> LesCourses
+        private static ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
+        private static ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
+        private static ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
+        private static ObservableCollection<Envoi_SMS> lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
+        private static ObservableCollection<Club> lesClubs = new ObservableCollection<Club>();
+        private static ObservableCollection<Amis> lesAmis = new ObservableCollection<Amis>();
+        private static ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
+        private static ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
+        private static ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
+        private static string login;
+        private static string password;
+        public static string Login
         {
-            get
-            {
-                return this.lesCourses;
-            }
-
+            get => login;
             set
             {
-                this.lesCourses = value;
+                if (value.Length > 8)
+                {
+                    throw new ArgumentException("Login trop long");
+                }
+                login = value;
             }
         }
-        public ObservableCollection<Coureur> LesCoureurs
-        {
-            get
-            {
-                return this.lesCoureurs;
-            }
-
-            set
-            {
-                this.lesCoureurs = value;
-            }
-        }
-
-        public NpgsqlConnection Connexion
-        {
-            get
-            {
-                return this.connexion;
-            }
-
-            set
-            {
-                this.connexion = value;
-            }
-        }
-
-        public ObservableCollection<Amis> LesAmis
-        {
-            get
-            {
-                return this.lesAmis;
-            }
-
-            set
-            {
-                this.lesAmis = value;
-            }
-        }
-
-        public ObservableCollection<Distance> LesDistances
-        {
-            get
-            {
-                return this.lesDistances;
-            }
-
-            set
-            {
-                this.lesDistances = value;
-            }
-        }
-
-        public ObservableCollection<Club> LesClubs
-        {
-            get
-            {
-                return this.lesClubs;
-            }
-
-            set
-            {
-                this.lesClubs = value;
-            }
-        }
-
-        public ObservableCollection<Envoi_SMS> LesEnvois_SMS
-        {
-            get
-            {
-                return this.lesEnvois_SMS;
-            }
-
-            set
-            {
-                this.lesEnvois_SMS = value;
-            }
-        }
-
-        public ObservableCollection<Federation> LesFederations
-        {
-            get
-            {
-                return this.lesFederations;
-            }
-
-            set
-            {
-                this.lesFederations = value;
-            }
-        }
-
-        public ObservableCollection<Inscription> LesInscriptions
-        {
-            get
-            {
-                return this.lesInscriptions;
-            }
-
-            set
-            {
-                this.lesInscriptions = value;
-            }
-        }
-
-        public ObservableCollection<Inscription2> LesInscriptions2
-        {
-            get
-            {
-                return this.lesInscriptions2;
-            }
-
-            set
-            {
-                this.lesInscriptions2 = value;
-            }
-        }
-        private Agent agentConnecter;
-
-        public Agent AgentConnecter
-        {
-            get { return agentConnecter; }
-            set { agentConnecter = value; }
-        }
-        private Connexion connexionWin;
-
-        public Connexion ConnexionWin
-        {
-            get { return connexionWin; }
-            set { connexionWin = value; }
-        }
+        public static string Password { get => password; set => password = value; }
 
 
+        public static ObservableCollection<Course> LesCourses { get => lesCourses; set => lesCourses = value; }
 
+        public static ObservableCollection<Coureur> LesCoureurs { get => lesCoureurs; set => lesCoureurs = value; }
+        public static ObservableCollection<Distance> LesDistances { get => lesDistances; set => lesDistances = value; }
+        public static ObservableCollection<Amis> LesAmis { get => lesAmis; set => lesAmis = value; }
+        public static ObservableCollection<Club> LesClubs { get => lesClubs; set => lesClubs = value; }
+        public static ObservableCollection<Envoi_SMS> LesEnvois_SMS { get => lesEnvois_SMS; set => lesEnvois_SMS = value; }
+        public static ObservableCollection<Federation> LesFederations { get => lesFederations; set => lesFederations = value; }
+        public static ObservableCollection<Inscription> LesInscriptions { get => lesInscriptions; set => lesInscriptions = value; }
+        public static ObservableCollection<Inscription2> LesInscriptions2 { get => lesInscriptions2; set => lesInscriptions2 = value; }
+
+  
         public ApplicationData()
         {
         }
 
-        public bool TryConnexionBD(Agent agentConnecter)
+        public static bool TryConnexionBD()
         {
-            DataAccess.AgentConnecter = agentConnecter;
+            DataAccess.Login = Login;
+            DataAccess.Password = Password;
             return DataAccess.Instance.ConnexionBD();
         }
 
-        public void DeconnexionBD()
+
+        public static void ReadCourse()
         {
-            try
+            LesCourses.Clear();
+            LesCoureurs.Clear();
+            LesDistances.Clear();
+            LesAmis.Clear();
+            LesClubs.Clear();
+            LesEnvois_SMS.Clear();
+            LesFederations.Clear();
+            LesInscriptions.Clear();
+            LesInscriptions2.Clear();
+            string sql = "SELECT num_course, distance, heure_depart, prix_inscription, nom_course, date_course FROM course";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                Connexion.Close();
+                Course nouveau = new Course(int.Parse(res["num_course"].ToString()), double.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
+                        double.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_course"].ToString()));
+                LesCourses.Add(nouveau);
             }
-            catch (Exception e)
-            { Console.WriteLine("pb à la déconnexion : " + e); }
-        }
-        public int ReadCourse()
-        {
-            this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription, nom_course, date_course FROM Course";
-            try
+            sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
-                        int.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_inscription"].ToString()));
-                    LesCourses.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
-            }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadCoureur()
-        {
-            this.LesCoureurs = new ObservableCollection<Coureur>();
-            String sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
-            try
-            {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), res["num_federation"].ToString(),
+                Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()), (res["code_club"].ToString()), res["num_federation"].ToString(),
                         res["nom_coureur"].ToString(), res["prenom_coureur"].ToString(), res["potable"].ToString());
-                    LesCoureurs.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                LesCoureurs.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadDistance()
-        {
-            this.lesDistances = new ObservableCollection<Distance>();
-            String sql = "SELECT num_course, num_borne, nb_km FROM Distance";
-            try
+            sql = "SELECT num_course, num_borne, nb_km FROM Distance";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()), int.Parse(res["num_borne"].ToString()), int.Parse(res["nb_km"].ToString()));
-                    lesDistances.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Distance nouveau = new Distance(int.Parse(res["num_course"].ToString()), int.Parse(res["num_borne"].ToString()), int.Parse(res["nb_km"].ToString()));
+                lesDistances.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadAmi()
-        {
-            this.lesAmis = new ObservableCollection<Amis>();
-            String sql = "SELECT num_ami FROM amis";
-            try
+            sql = "SELECT num_ami FROM amis";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Amis nouveau = new Amis(int.Parse(res["num_ami"].ToString()));
-                    lesAmis.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Amis nouveau = new Amis(int.Parse(res["num_ami"].ToString()));
+                lesAmis.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadClub()
-        {
-            this.lesClubs = new ObservableCollection<Club>();
-            String sql = "SELECT code_club, nom_club FROM club";
-            try
+            sql = "SELECT code_club, nom_club FROM club";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Club nouveau = new Club(res["code_club"].ToString(), res["nom_club"].ToString());
-                    lesClubs.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Club nouveau = new Club(res["code_club"].ToString(), res["nom_club"].ToString());
+                lesClubs.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-
-        public int ReadEnvoiSms()
-        {
-            this.lesEnvois_SMS = new ObservableCollection<Envoi_SMS>();
-            String sql = "SELECT num_ami, num_inscription, portable_sms FROM envoi_sms";
-            try
+            sql = "SELECT num_ami, num_inscription, portable_sms FROM envoi_sms";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Envoi_SMS nouveau = new Envoi_SMS(int.Parse(res["num_ami"].ToString()), int.Parse(res["num_inscription"].ToString()), res["portable_sms"].ToString());
-                    lesEnvois_SMS.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Envoi_SMS nouveau = new Envoi_SMS(int.Parse(res["num_ami"].ToString()), int.Parse(res["num_inscription"].ToString()), res["portable_sms"].ToString());
+                lesEnvois_SMS.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        
-        public int ReadFederation()
-        {
-            this.LesFederations = new ObservableCollection<Federation>();
-            String sql = "SELECT num_federation, nom_federation FROM federation";
-            try
+            sql = "SELECT num_federation, nom_federation FROM federation";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Federation nouveau = new Federation(res["num_federation"].ToString(), res["nom_federation"].ToString());
-                    LesFederations.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Federation nouveau = new Federation(res["num_federation"].ToString(), res["nom_federation"].ToString());
+                LesFederations.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadInscription()
-        {
-            this.LesInscriptions = new ObservableCollection<Inscription>();
-            String sql = "SELECT num_inscription, num_course, date_inscription FROM inscription";
-            try
+            sql = "SELECT num_inscription, num_course, date_inscription FROM inscription";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
-                    LesInscriptions.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
+                LesInscriptions.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-        public int ReadInscription2()
-        {
-            this.LesInscriptions2 = new ObservableCollection<Inscription2>();
-            String sql = "SELECT num_inscription, num_coureur, date_inscription FROM inscription2";
-            try
+            sql = "SELECT num_inscription, num_coureur, temps_prevu FROM inscription2";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                DataTable dataTable = DataAccess.Instance.GetData(sql);
-                foreach (DataRow res in dataTable.Rows)
-                {
-                    Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
-                    LesInscriptions2.Add(nouveau);
-                }
-                return dataTable.Rows.Count;
+                Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
+                LesInscriptions2.Add(nouveau);
             }
-            catch (NpgsqlException e)
-            { Console.WriteLine("pb de requete : " + e); return 0; }
-        }
-
-
+        }  
     }
 }

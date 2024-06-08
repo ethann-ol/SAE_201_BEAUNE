@@ -27,8 +27,6 @@ namespace SAE_201_BEAUNE
 			set {
 				if (value.Length > 2)
 					throw new ArgumentOutOfRangeException("Le code club est trop long");
-				if (String.IsNullOrEmpty(value))
-					throw new ArgumentException("Le code club ne peut pas etre vide");
 				this.code_club = value;
 			}
 		}
@@ -38,11 +36,6 @@ namespace SAE_201_BEAUNE
 		{
 			get { return this.num_federation; }
 			set {
-                if (String.IsNullOrEmpty(value))
-                    throw new ArgumentNullException("Vous devez saisir un numéro fédération valide");
-
-
-
                 this.num_federation = value; }
 		}
 		private string nom_coureur;

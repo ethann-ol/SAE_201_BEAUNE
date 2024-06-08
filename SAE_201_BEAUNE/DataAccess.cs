@@ -13,18 +13,22 @@ namespace SAE_201_BEAUNE
     public class DataAccess
     {
         private static DataAccess instance;
-        private static Agent agentConnecter;
         private static string strConnexion;
+        private static string password;
+        private static string login;
+        private bool isConnected;
+
         private DataAccess()
         {
             //ConnexionBD();
         }
+        /*
         public static Agent AgentConnecter
         { 
             get { return agentConnecter; }
             set { agentConnecter = value; }
         }
-
+        */
         public static DataAccess Instance
         {
             get
@@ -41,39 +45,43 @@ namespace SAE_201_BEAUNE
             get;
             set;
         }
+        public static string Login { get => login; set => login = value; }
+        public static string Password { get => password; set => password = value; }
+        public bool IsConnected { get => isConnected; set => isConnected = value; }
         public bool ConnexionBD()
         {
-            strConnexion = "Server=srv-peda-new;port=5433;"
-            + $"Database=Beaune;Search Path=Beaune;uid={AgentConnecter.Login_agent};password={AgentConnecter.Mdp_agent};";
-
-            bool pbConnexion = false;
+            string strConnexion2 = "Server=srv-peda-new;port=5433;"
+            + $"Database=sae201_marathon;Search Path=beaune;uid={Login};password={Password};";
+            strConnexion = $"Host=localhost;Username={Login};Password={Password};Database=sae201_marathon";
             try
             {
                 Connexion = new NpgsqlConnection();
                 Connexion.ConnectionString = strConnexion;
                 Connexion.Open();
-
+                return true;
                 // à compléter dans les "" 
                 // @ sert à enlever tout pb avec les caractères 
             }
             catch (Exception e)
             {
-
+                Connexion = null;
                 MessageBox.Show("Votre mot de passe ou login est incorecte");
-                pbConnexion = true;
+                return false;   
 
                 // juste pour le debug : à transformer en MsgBox 
             }
+            /*
             if (!pbConnexion)
                 return true;
             else 
                 return false;
+            */
         }
         public void DeconnexionBD()
         {
             try
             {
-                Connexion.Close();
+               Connexion.Close();
             }
             catch (Exception e)
             { Console.WriteLine("pb à la déconnexion : " + e); }
