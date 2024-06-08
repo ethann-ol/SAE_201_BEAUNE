@@ -16,8 +16,8 @@
         <TextBox x:Name="txtNumCourse" TextWrapping="Wrap" Text="{Binding Num_course, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center"/>
         <Label x:Name="labNumCoureur" Target="{Binding ElementName=textNumCoureur, Mode=OneWay}" Content="Numéro du coureur" HorizontalAlignment="Center"/>
         <TextBox x:Name="textNumCoureur" TextWrapping="Wrap" Text="{Binding NumCoureur, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center"/>
-        <Label x:Name="labTemps" Target="{Binding ElementName=textTempsPrévu, Mode=OneWay}" Content="Temps prévu" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="textTempsPrévu" TextWrapping="Wrap" Text="{Binding TempsPrevu, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True ,StringFormat=hh\\:mm}" Width="120" HorizontalAlignment="Center"/>
+        <Label x:Name="labTemps" Target="{Binding ElementName=textTempsPrévu, Mode=OneWay}" Content="Temps prévu (format hh:mm)" HorizontalAlignment="Center"/>
+            <TextBox x:Name="textTempsPrévu" TextWrapping="Wrap" Text="{Binding TempsPrevu, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True ,StringFormat=hh\\:mm}" Width="120" HorizontalAlignment="Center"/>
         <Label x:Name="labDateInscription" Target="{Binding ElementName=dpInscription, Mode=OneWay}" Content="Date d'inscription" HorizontalAlignment="Center"/>
         <DatePicker x:Name="dpInscription" SelectedDate="{Binding Date_inscription, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button x:Name="butInscription" Content="Button" HorizontalAlignment="Center" Click="butInscription_Click"/>

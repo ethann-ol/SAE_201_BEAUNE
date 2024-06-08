@@ -33,7 +33,7 @@ namespace SAE_201_BEAUNE
 			get { return this.date_insription; }
 			set { 
 				DateTime today =  DateTime.Today;
-				if (value <= today)
+				if (value > today)
 					throw new ArgumentException("La date d'inscription n'est pas valide");
 				this.date_insription = value;
 			}

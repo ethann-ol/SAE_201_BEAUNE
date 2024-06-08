@@ -61,8 +61,8 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataInscription" />
-                    <DataGrid Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    <DataGrid x:Name="dataInscription" ItemsSource="{Binding LesInscriptions}"/>
+                    <DataGrid x:Name="dataInscription2" Grid.Column="1" ItemsSource="{Binding LesInscriptions2 }"/>
                 </Grid>
             </TabItem>
         </TabControl>
