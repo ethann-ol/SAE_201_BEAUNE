@@ -18,6 +18,7 @@ namespace SAE_201_BEAUNE
 
     public class ApplicationData
     {
+        
         private static ObservableCollection<Inscription2> lesInscriptions2 = new ObservableCollection<Inscription2>();
         private static ObservableCollection<Inscription> lesInscriptions = new ObservableCollection<Inscription>(); 
         private static ObservableCollection<Federation> lesFederations = new ObservableCollection<Federation>();
@@ -27,6 +28,7 @@ namespace SAE_201_BEAUNE
         private static ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
         private static ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
         private static ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
+        private static ObservableCollection<InsccriptionTotale> lesInsccriptionTotales = new ObservableCollection<InsccriptionTotale>();
         private static string login;
         private static string password;
         public static string Login
@@ -45,7 +47,7 @@ namespace SAE_201_BEAUNE
 
 
         public static ObservableCollection<Course> LesCourses { get => lesCourses; set => lesCourses = value; }
-
+        public static ObservableCollection<InsccriptionTotale> LesInscrits { get => lesInsccriptionTotales; set => lesInsccriptionTotales = value; }
         public static ObservableCollection<Coureur> LesCoureurs { get => lesCoureurs; set => lesCoureurs = value; }
         public static ObservableCollection<Distance> LesDistances { get => lesDistances; set => lesDistances = value; }
         public static ObservableCollection<Amis> LesAmis { get => lesAmis; set => lesAmis = value; }
@@ -54,7 +56,6 @@ namespace SAE_201_BEAUNE
         public static ObservableCollection<Federation> LesFederations { get => lesFederations; set => lesFederations = value; }
         public static ObservableCollection<Inscription> LesInscriptions { get => lesInscriptions; set => lesInscriptions = value; }
         public static ObservableCollection<Inscription2> LesInscriptions2 { get => lesInscriptions2; set => lesInscriptions2 = value; }
-
   
         public ApplicationData()
         {
@@ -68,7 +69,7 @@ namespace SAE_201_BEAUNE
         }
 
 
-        public static void ReadCourse()
+        public static void Read()
         {
             LesCourses.Clear();
             LesCoureurs.Clear();
@@ -139,16 +140,42 @@ namespace SAE_201_BEAUNE
                 Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
                 LesInscriptions2.Add(nouveau);
             }
+            sql = "SELECT i.num_inscription,num_course, num_coureur,temps_prevu,date_inscription FROM inscription i " +
+                "JOIN inscription2 i2 ON i2.num_inscription = i.num_inscription";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
+            {
+                InsccriptionTotale nouveau = new InsccriptionTotale(int.Parse(res["num_inscription"].ToString()), 
+                    int.Parse(res["num_course"].ToString()), int.Parse(res["num_coureur"].ToString()), 
+                    TimeSpan.Parse(res["temps_prevu"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
+                LesInscrits.Add(nouveau);
+                            }
         }  
-        public static void CreateInscription(Inscription i, Inscription2 i2)
+        public static void CreateInscription(InsccriptionTotale i)
         {
             int nb;
-            string sql = $"insert into inscription (num_course,date_inscription)"
-            + $" values ('{i.Num_course}','{i.Date_inscription}');";
-            NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
-            sql = $"insert into inscription2 (num_course,date_inscription)"
-            + $" values ('{i.Num_course}','{i.Date_inscription}');";
-            NpgsqlCommand cmd2 = new NpgsqlCommand(sql,DataAccess.Instance.Connexion);
+            string sql = $"insert into inscription ( num_inscription, num_course,date_inscription)"
+            + $" values ('{i.Num_inscription}','{i.Num_course}','{i.Date_inscription.Year}-{i.Date_inscription.Month}-{i.Date_inscription.Day}');";
+            try
+            {
+
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("pb de requete"+sql+""+ex.Message);
+            }
+            
+            sql = $"insert into inscription2 (num_inscription,num_coureur,temps_prevu)"
+            + $" values ('{i.Num_inscription}','{i.Num_coureur}','{i.Temps_prevu}');";
+            try
+            {
+
+                NpgsqlCommand cmd2 = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("pb de requete" + sql + "" + ex.Message);
+            }
         }
     }
 }

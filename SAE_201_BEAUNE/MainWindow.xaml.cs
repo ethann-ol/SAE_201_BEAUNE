@@ -38,7 +38,7 @@ namespace SAE_201_BEAUNE
                 Environment.Exit(0);
             }
             InitializeComponent();
-            ApplicationData.ReadCourse();
+            ApplicationData.Read();
 
 
 
@@ -65,13 +65,6 @@ namespace SAE_201_BEAUNE
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void butInscrire_Click(object sender, RoutedEventArgs e)
-        {
-           Inscription inscription = new Inscription();
-            
-
         }
 
         private void butAjouter_Click(object sender, RoutedEventArgs e)

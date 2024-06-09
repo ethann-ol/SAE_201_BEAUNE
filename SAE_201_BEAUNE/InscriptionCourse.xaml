@@ -5,22 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_201_BEAUNE"
         mc:Ignorable="d"
-        Title="InscriptionCourse" Height="450" Width="800">
+        Title="InscriptionCourse" Height="450" Width="300">
     <Window.DataContext>
-        <local:Inscription x:Name="inscri"/>
+        <local:InsccriptionTotale x:Name="inscri"/>
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <StackPanel>
-        <Label Content="Pour inscrire Veuillez saisir une course et un coureur." HorizontalAlignment="Center"/>
-        <Label x:Name="labNumCurse" Target="{Binding ElementName=txtNumCourse, Mode=OneWay}" Content="Numéro de Course" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtNumCourse" TextWrapping="Wrap" Text="{Binding Num_course, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center"/>
-        <Label x:Name="labNumCoureur" Target="{Binding ElementName=textNumCoureur, Mode=OneWay}" Content="Numéro du coureur" HorizontalAlignment="Center"/>
-        <TextBox x:Name="textNumCoureur" TextWrapping="Wrap" Text="{Binding NumCoureur, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center"/>
-        <Label x:Name="labTemps" Target="{Binding ElementName=textTempsPrévu, Mode=OneWay}" Content="Temps prévu (format hh:mm)" HorizontalAlignment="Center"/>
-            <TextBox x:Name="textTempsPrévu" TextWrapping="Wrap" Text="{Binding TempsPrevu, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True ,StringFormat=hh\\:mm}" Width="120" HorizontalAlignment="Center"/>
-        <Label x:Name="labDateInscription" Target="{Binding ElementName=dpInscription, Mode=OneWay}" Content="Date d'inscription" HorizontalAlignment="Center"/>
-        <DatePicker x:Name="dpInscription" SelectedDate="{Binding Date_inscription, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button x:Name="butInscription" Content="Button" HorizontalAlignment="Center" Click="butInscription_Click"/>
+        <StackPanel x:Name="stackInscri">
+            <Label Content="Pour inscrire Veuillez saisir une course et un coureur." HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <Label x:Name="labNumCurse" Target="{Binding ElementName=txtNumCourse, Mode=OneWay}" Content="Numéro de Course" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <TextBox x:Name="txtNumCourse" TextWrapping="Wrap" Text="{Binding Num_course, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <Label x:Name="labNumCoureur" Target="{Binding ElementName=textNumCoureur, Mode=OneWay}" Content="Numéro du coureur" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <TextBox x:Name="textNumCoureur" TextWrapping="Wrap" Text="{Binding Num_coureur, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Width="120" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <Label x:Name="labTemps" Target="{Binding ElementName=textTempsPrévu, Mode=OneWay}" Content="Temps prévu (format hh:mm)" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <TextBox x:Name="textTempsPrévu" TextWrapping="Wrap" Text="{Binding Temps_prevu, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True ,StringFormat=hh\\:mm}" Width="120" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+            <Button x:Name="butInscription" Content="Inscrire" HorizontalAlignment="Center" Click="butInscription_Click" Margin="0,5,0,9"/>
         </StackPanel>
     </Grid>
 </Window>

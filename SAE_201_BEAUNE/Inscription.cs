@@ -11,13 +11,14 @@ namespace SAE_201_BEAUNE
 		public int NumCoureur;
 		public TimeSpan TempsPrevu;
 		private  int num_inscription;
-		private static int id = 0;
+		public static int id = 0;
 		
 
 		public int Num_inscription
 		{
 			get { return num_inscription; }
-			set { this.num_inscription = value; }
+			set {
+				this.num_inscription = value; }
 		}
 		private int num_course;
 

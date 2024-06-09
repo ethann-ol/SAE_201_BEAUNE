@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +28,24 @@ namespace SAE_201_BEAUNE
         private void butInscription_Click(object sender, RoutedEventArgs e)
         {
 
-            Inscription course = new Inscription(inscri.Num_course,DateTime.Today);
-            ApplicationData.LesInscriptions.Add(course);
-            Inscription2 course2 = new Inscription2(course.Num_inscription, inscri.NumCoureur, TimeSpan.Parse(inscri.TempsPrevu.ToString()));
-            ApplicationData.LesInscriptions2.Add(course2);
-            ApplicationData.CreateInscription(course, course2);
+            bool ok = true;
+            foreach (UIElement uie in stackInscri.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+                if (Validation.GetHasError(uie))
+                    ok = false;
+            }
+
+            //Console.WriteLine(inscri.Num_Course);
+            InsccriptionTotale course_totale = new InsccriptionTotale(inscri.Num_course,inscri.Num_coureur,TimeSpan.Parse(inscri.Temps_prevu.ToString()));
+            //Inscription2 course2 = new Inscription2(course.Num_inscription, inscri.NumCoureur, TimeSpan.Parse(inscri.TempsPrevu.ToString()));
+            ApplicationData.LesInscrits.Add(course_totale);
+            ApplicationData.CreateInscription(course_totale);
+            this.Close();
         }
     }
 }

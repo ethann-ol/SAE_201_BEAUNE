@@ -19,19 +19,20 @@
             <TabItem Header="Inscrire Course">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="343*" />
+                        <RowDefinition Height="213*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="239*" />
                         <ColumnDefinition Width="358*" />
                     </Grid.ColumnDefinitions>
+
                     <Image
                         x:Name="logoImg"
                         Grid.Row="1"
                         Width="195"
                         Height="101"
-                        Margin="0,102,0,0"
+                        Margin="10,6,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         RenderTransformOrigin="0.06,0.001"
@@ -47,22 +48,28 @@
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCoureurs}">
                     </DataGrid>
-                    <StackPanel x:Name="StackInscrire" Grid.Column="1" Grid.Row="1">
-                        <Button x:Name="butAjouter" ToolTip="Ajouter un nouveau département" Margin="10,0,0,0" Click="butAjouter_Click" Height="50" Width="50" >
-                            <Image Source="img\ajouter.png" />
-                        </Button>
-                    </StackPanel>
+                    <StackPanel  Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label Grid.Column="1" Content="Inscrire un coureur à une course" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
 
-                </Grid>
+                        <Button x:Name="butAjouter"  ToolTip="Ajouter un nouveau département" Click="butAjouter_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" >
+                            <Image Source="img\ajouter.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button>
+
+                    </StackPanel>
+                    </Grid>
             </TabItem>
             <TabItem Header="Les Inscriptions">
                 <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="313*"/>
+                        <RowDefinition Height="243*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dataInscription" ItemsSource="{Binding LesInscriptions}"/>
-                    <DataGrid x:Name="dataInscription2" Grid.Column="1" ItemsSource="{Binding LesInscriptions2 }"/>
+                    <DataGrid x:Name="dataInscription2" Grid.Column="1" ItemsSource="{Binding LesInscrits }"/>
                 </Grid>
             </TabItem>
         </TabControl>
