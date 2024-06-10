@@ -100,17 +100,27 @@ namespace SAE_201_BEAUNE
         {
             if (dataInscription.SelectedItem != null)
             {
-                InsccriptionTotale clientSelectionne = (InsccriptionTotale)dataInscription.SelectedItem;
+                InsccriptionTotale InscriptionSelect = (InsccriptionTotale)dataInscription.SelectedItem;
                 MessageBoxResult res = MessageBox.Show(this, "Etes vous sur de vouloir supprimer "
-                    + clientSelectionne.Num_inscription + " " + clientSelectionne.Num_coureur + " ?", "Confirmation",
+                    + InscriptionSelect.Num_inscription + " " + InscriptionSelect.Num_coureur + " ?", "Confirmation",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
-                    ApplicationData.LesInscrits
-                        .Remove(clientSelectionne);
+                    ApplicationData.LesInscrits.Remove(InscriptionSelect);
+                    string sql = $"delete from amis where num_inscription ={InscriptionSelect.Num_inscription};";
+                    DataAccess.Instance.SetData(sql);
+                    sql = $"delete from inscription2 where num_inscription ={InscriptionSelect.Num_inscription};";
+                    DataAccess.Instance.SetData(sql);
+                    sql = $"delete from inscription where num_inscription ={InscriptionSelect.Num_inscription};";
+                    DataAccess.Instance.SetData(sql);
+                    
+
+
 
             }
             else
                 MessageBox.Show(this, "Veuillez selectionner un client");
         }
+
+      
     }
 }

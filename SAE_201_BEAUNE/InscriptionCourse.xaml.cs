@@ -55,9 +55,9 @@ namespace SAE_201_BEAUNE
             {
                 Inscription newInscrit = new Inscription(course_totale.Num_course, course_totale.Date_inscription);
                 //Inscription2 course2 = new Inscription2(course.Num_inscription, inscri.NumCoureur, TimeSpan.Parse(inscri.TempsPrevu.ToString()));
-                ApplicationData.LesInscrits.Add(course_totale);
-                ApplicationData.LesInscriptions.Add(newInscrit);
                 ApplicationData.CreateInscription(course_totale);
+                ApplicationData.LesInscriptions.Add(newInscrit);
+                ApplicationData.LesInscrits.Add(course_totale);
                 this.Close();
             }
             else

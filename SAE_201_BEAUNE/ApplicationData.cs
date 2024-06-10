@@ -156,50 +156,23 @@ namespace SAE_201_BEAUNE
             foreach(InsccriptionTotale ins in LesInscrits)
             {
                 if (i.Num_inscription == ins.Num_inscription)
-                    i.Num_inscription++;
-
+                    i.Num_inscription++; InsccriptionTotale.id++;
             }
 
             string sql = $"insert into inscription ( num_inscription, num_course,date_inscription)"
             + $" values ('{i.Num_inscription}','{i.Num_course}','{i.Date_inscription.Year}-{i.Date_inscription.Month}-{i.Date_inscription.Day}');";
-            try
-            {
-                NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("pb de requete"+sql+""+ex.Message);
-            }
-            
+            DataAccess.Instance.SetData(sql);
+
             sql = $"insert into inscription2 (num_inscription,num_coureur,temps_prevu)"
             + $" values ('{i.Num_inscription}','{i.Num_coureur}','{i.Temps_prevu}');";
-            try
-            {
+            DataAccess.Instance.SetData(sql);
 
-                NpgsqlCommand cmd2 = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
-                cmd2.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("pb de requete" + sql + "" + ex.Message);
-            }
-            
         }
         public static void CreateEnvoisSms(Envoi_SMS e)
         {
             string sql = $"insert into envoi_sms(num_ami,num_inscription,portable_sms)" +
                 $"values ('{e.Num_ami}','{e.Num_inscription}','{e.Portable_sms}') ;";
-            try
-            {
-
-                NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("pb de requete" + sql + "" + ex.Message);
-            }
+            DataAccess.Instance.SetData(sql);
         }
     }
 }
