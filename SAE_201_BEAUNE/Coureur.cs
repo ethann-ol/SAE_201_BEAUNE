@@ -46,7 +46,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 50)
                     throw new ArgumentOutOfRangeException("Le nom coureur est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le nom coureur ne peut pas etre vide");
                 this.nom_coureur = value;
 			}
@@ -59,7 +59,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 100)
                     throw new ArgumentOutOfRangeException("Le lien est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le lien ne peut pas etre vide");
                 this.lien_photo = value;
 
@@ -73,7 +73,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 50)
                     throw new ArgumentOutOfRangeException("Le prenom est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le prenom ne peut pas etre vide");
                 this.prenom_coureur = value;
             }

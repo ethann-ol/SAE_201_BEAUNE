@@ -105,7 +105,8 @@ namespace SAE_201_BEAUNE
                     + clientSelectionne.Num_inscription + " " + clientSelectionne.Num_coureur + " ?", "Confirmation",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
-                    ApplicationData.LesInscrits.Remove(clientSelectionne);
+                    ApplicationData.LesInscrits
+                        .Remove(clientSelectionne);
 
             }
             else

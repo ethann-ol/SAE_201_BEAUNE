@@ -19,25 +19,37 @@ namespace SAE_201_BEAUNE
 		public DateTime Date_inscription
 		{
 			get { return date_inscription; }
-			set { this.date_inscription = value; }
+			set {
+                this.date_inscription = value; }
 		}
 
 		public TimeSpan Temps_prevu
 		{
 			get { return temps_prevu; }
-			set { this.temps_prevu = value; }
+			set
+            {
+                if (value == null)
+                    throw new ArgumentException("Le prenom ne peut pas etre vide");
+                this.temps_prevu = value; }
 		}
 
 		public int Num_coureur
 		{
 			get { return num_coureur; }
-			set { this.num_coureur = value; }
+			set {
+                if (value == null)
+                    throw new ArgumentException("Le numcoureur ne peut pas etre vide");
+                this.num_coureur = value; }
 		}
 
 		public int Num_course
 		{
 			get { return num_course; }
-			set { this.num_course = value; }
+			set
+            {
+                if (value == null)
+                    throw new ArgumentException("Le numcourse ne peut pas etre vide");
+                this.num_course = value; }
 		}
 
 		public int Num_inscription
