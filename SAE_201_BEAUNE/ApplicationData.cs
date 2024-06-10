@@ -156,7 +156,7 @@ namespace SAE_201_BEAUNE
             foreach(InsccriptionTotale ins in LesInscrits)
             {
                 if (i.Num_inscription == ins.Num_inscription)
-                    i.Num_inscription++; InsccriptionTotale.id++;
+                    i.Num_inscription++;
             }
 
             string sql = $"insert into inscription ( num_inscription, num_course,date_inscription)"
