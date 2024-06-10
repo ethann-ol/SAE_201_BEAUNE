@@ -11,7 +11,6 @@ namespace SAE_201_BEAUNE
 		public int NumCoureur;
 		public TimeSpan TempsPrevu;
 		private  int num_inscription;
-		public static int id = 0;
 		
 
 		public int Num_inscription
@@ -44,7 +43,6 @@ namespace SAE_201_BEAUNE
         }
         public Inscription(int num_course, DateTime date_inscription)
         {
-			this.num_inscription = id++;
             this.Num_course = num_course;
             this.Date_inscription = date_inscription;
         }

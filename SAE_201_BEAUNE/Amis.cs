@@ -10,6 +10,7 @@ namespace SAE_201_BEAUNE
     {
 		private int num_ami;
 
+
 		public int Num_ami
 		{
 			get { return this.num_ami; }

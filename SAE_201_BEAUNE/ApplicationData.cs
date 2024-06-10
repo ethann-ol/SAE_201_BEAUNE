@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using Npgsql;
 
 namespace SAE_201_BEAUNE
@@ -90,7 +91,6 @@ namespace SAE_201_BEAUNE
             sql = "SELECT num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur, ville_coureur, potable, sexe, num_licence FROM coureur";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
-                Console.WriteLine(res["potable"]);
                 Coureur nouveau = new Coureur(int.Parse(res["num_coureur"].ToString()),
                         res["code_club"].ToString(), res["num_federation"].ToString(),
                         res["nom_coureur"].ToString(), 
@@ -134,12 +134,12 @@ namespace SAE_201_BEAUNE
                 Inscription nouveau = new Inscription(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_course"].ToString()), DateTime.Parse(res["date_inscription"].ToString()));
                 LesInscriptions.Add(nouveau);
             }
-            sql = "SELECT num_inscription, num_coureur, temps_prevu FROM inscription2";
+           /* sql = "SELECT num_inscription, num_coureur, temps_prevu FROM inscription2";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
             {
                 Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
                 LesInscriptions2.Add(nouveau);
-            }
+            }*/
             sql = "SELECT i.num_inscription,num_course, num_coureur,temps_prevu,date_inscription FROM inscription i " +
                 "JOIN inscription2 i2 ON i2.num_inscription = i.num_inscription";
             foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
@@ -153,12 +153,19 @@ namespace SAE_201_BEAUNE
         public static void CreateInscription(InsccriptionTotale i)
         {
             int nb;
+            foreach(InsccriptionTotale ins in LesInscrits)
+            {
+                if (i.Num_inscription == ins.Num_inscription)
+                    i.Num_inscription++;
+
+            }
+
             string sql = $"insert into inscription ( num_inscription, num_course,date_inscription)"
             + $" values ('{i.Num_inscription}','{i.Num_course}','{i.Date_inscription.Year}-{i.Date_inscription.Month}-{i.Date_inscription.Day}');";
             try
             {
-
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -171,6 +178,23 @@ namespace SAE_201_BEAUNE
             {
 
                 NpgsqlCommand cmd2 = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+                cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("pb de requete" + sql + "" + ex.Message);
+            }
+            
+        }
+        public static void CreateEnvoisSms(Envoi_SMS e)
+        {
+            string sql = $"insert into envoi_sms(num_ami,num_inscription,portable_sms)" +
+                $"values ('{e.Num_ami}','{e.Num_inscription}','{e.Portable_sms}') ;";
+            try
+            {
+
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, DataAccess.Instance.Connexion);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

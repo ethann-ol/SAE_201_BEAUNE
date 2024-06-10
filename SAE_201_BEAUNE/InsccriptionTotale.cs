@@ -51,17 +51,17 @@ namespace SAE_201_BEAUNE
 
         public InsccriptionTotale(int num_inscription, int num_course, int num_coureur, TimeSpan temps_prevu, DateTime date_inscription)
         {
-            Num_inscription = num_inscription;
-            Num_course = num_course;
-            Num_coureur = num_coureur;
-            Temps_prevu = temps_prevu;
-            Date_inscription = date_inscription;
-			id = num_inscription;
+            this.Num_inscription = num_inscription;
+            this.Num_course = num_course;
+            this.Num_coureur = num_coureur;
+            this.Temps_prevu = temps_prevu;
+            this.Date_inscription = date_inscription;
+			id = this.Num_inscription;
         }
 
         public InsccriptionTotale(int num_course, int num_coureur, TimeSpan temps_prevu)
         {
-			this.Num_inscription = ++id;
+			this.Num_inscription = id;
             this.Num_course = num_course;
             this.Num_coureur = num_coureur;
             this.Temps_prevu = temps_prevu;

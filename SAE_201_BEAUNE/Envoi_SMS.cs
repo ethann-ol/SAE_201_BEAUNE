@@ -12,6 +12,10 @@ namespace SAE_201_BEAUNE
         private int num_inscription;
         private string portable_sms;
 
+        public Envoi_SMS()
+        {
+        }
+
         public Envoi_SMS(int num_ami, int num_inscription, string portable_sms)
         {
             this.Num_ami = num_ami;

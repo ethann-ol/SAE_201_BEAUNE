@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -71,6 +72,44 @@ namespace SAE_201_BEAUNE
         {
             InscriptionCourse inscriptionApp = new InscriptionCourse();
             inscriptionApp.ShowDialog();
+        }
+
+
+        private void dataInscription_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Inscription clientSelectionne = (Inscription)dataInscription.SelectedItem;
+            string sql = $"select * from inscription2 where num_inscription = {clientSelectionne.Num_inscription} ;";
+            foreach (DataRow res in DataAccess.Instance.GetData(sql).Rows)
+            {
+                Inscription2 nouveau = new Inscription2(int.Parse(res["num_inscription"].ToString()), int.Parse(res["num_coureur"].ToString()), TimeSpan.Parse(res["temps_prevu"].ToString()));
+                ApplicationData.LesInscriptions2.Add(nouveau);
+                Console.WriteLine(nouveau);
+                
+            }
+            
+            Console.WriteLine(clientSelectionne);
+        }
+
+        private void butAjoutAmis_Click(object sender, RoutedEventArgs e)
+        {
+            AjouterUnAmi app = new AjouterUnAmi();
+            app.ShowDialog();
+        }
+
+        private void butSupprimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataInscription.SelectedItem != null)
+            {
+                InsccriptionTotale clientSelectionne = (InsccriptionTotale)dataInscription.SelectedItem;
+                MessageBoxResult res = MessageBox.Show(this, "Etes vous sur de vouloir supprimer "
+                    + clientSelectionne.Num_inscription + " " + clientSelectionne.Num_coureur + " ?", "Confirmation",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                    ApplicationData.LesInscrits.Remove(clientSelectionne);
+
+            }
+            else
+                MessageBox.Show(this, "Veuillez selectionner un client");
         }
     }
 }
