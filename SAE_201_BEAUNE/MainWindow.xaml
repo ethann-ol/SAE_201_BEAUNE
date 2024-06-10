@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:SAE_201_BEAUNE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Course Beaune"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="600"
     Closing="Window_Closing"
     mc:Ignorable="d">
     <Window.DataContext>
@@ -19,19 +19,20 @@
             <TabItem Header="Inscrire Course">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="343*" />
+                        <RowDefinition Height="213*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="138*" />
-                        <ColumnDefinition Width="259*" />
+                        <ColumnDefinition Width="239*" />
+                        <ColumnDefinition Width="358*" />
                     </Grid.ColumnDefinitions>
+
                     <Image
                         x:Name="logoImg"
                         Grid.Row="1"
                         Width="195"
                         Height="101"
-                        Margin="0,102,0,0"
+                        Margin="10,6,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         RenderTransformOrigin="0.06,0.001"
@@ -40,32 +41,63 @@
                         x:Name="dataCourse"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCourses}">
-                    </ComboBox>
+                    </DataGrid>
                     <DataGrid
                         x:Name="dataCoureur"
                         Grid.Column="1"
-                        AutoGenerateColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCoureurs}">
-                        <DataGrid.Columns>
-
-                            <DataGridTextColumn Binding="{Binding Num_coureur}" Header="Numéro Coureur" />
-                            <DataGridTextColumn Binding="{Binding Code_club}" Header="Code Club" />
-                            <DataGridTextColumn Binding="{Binding Num_federation}" Header="Fédération" />
-                            <DataGridTextColumn Binding="{Binding Nom_coureur}" Header="Nom" />
-                            <DataGridTextColumn Binding="{Binding Lien_photo}" Header="Photo" />
-                            <DataGridTextColumn Binding="{Binding Prenom_coureur}" Header="Prénom" />
-                            <DataGridTextColumn Binding="{Binding Ville_coureur}" Header="Ville" />
-                            <DataGridTextColumn Binding="{Binding Portable}" Header="Portable" />
-                            <DataGridTextColumn Binding="{Binding Sexe}" Header="Sexe" />
-                            <DataGridTextColumn Binding="{Binding Num_licence}" Header="Licence" />
-                        </DataGrid.Columns>
                     </DataGrid>
+                    <StackPanel  Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label Grid.Column="1" Content="Inscrire un coureur à une course" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
 
+                        <Button x:Name="butAjouter"  ToolTip="Ajouter une nouvelle Course" Click="butAjouter_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" >
+                            <Image Source="img\ajouter.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button>
+
+                    </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5" />
+            <TabItem Header="Les Inscriptions">
+                <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="229*"/>
+                        <RowDefinition Height="327*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="481*"/>
+                        <ColumnDefinition Width="624*"/>
+                        <ColumnDefinition Width="89*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dataInscription" ItemsSource="{Binding LesInscrits}"  MouseDoubleClick="dataInscription_MouseDoubleClick" Grid.RowSpan="2" AutoGenerateColumns="False">
+                        <DataGrid.Columns >
+
+                            <DataGridTextColumn Header="Numéro Inscription" Binding="{Binding Num_inscription}" />
+                            <DataGridTextColumn Header="Numéro Course" Binding="{Binding Num_course}"  />
+                            <DataGridTextColumn Header="Numéro Coureur" Binding="{Binding Num_coureur}"  />
+                            <DataGridTextColumn Header="Temps prévu" Binding="{Binding Temps_prevu}" />
+                            <DataGridTextColumn Header="Date Inscription" Binding="{Binding Date_inscription}"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid Grid.Column="2" ItemsSource="{Binding LesAmis}" Grid.RowSpan="2"/>
+                    <DataGrid Grid.Column="1" Grid.Row="1" ItemsSource="{Binding LesEnvois_SMS}"/>
+                    <StackPanel Grid.Column="1" Width="200" HorizontalAlignment="Left">
+                        <Label Content="Ajouté un ami à l'inscription" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button x:Name="butAjoutAmis"  ToolTip="Ajouter une nouvelle Course" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="30" Click="butAjoutAmis_Click" >
+                        <Image Source="img\ajouter.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button>
+                        <Label Content="Modifier une inscription" HorizontalAlignment="Center"/>
+                        <Button x:Name="butModifier"  ToolTip="Modifier Inscription"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="30" >
+                        <Image Source="img\modifier.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Button>
+                        <Label Content="Supprimer l'inscription" HorizontalAlignment="Center"/>
+                        <Button x:Name="butSupprimer"  ToolTip="Supprimer une inscription" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="butSupprimer_Click" >
+                        <Image Source="img\supprimer.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" />
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
 

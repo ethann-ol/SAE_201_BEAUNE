@@ -27,8 +27,6 @@ namespace SAE_201_BEAUNE
 			set {
 				if (value.Length > 2)
 					throw new ArgumentOutOfRangeException("Le code club est trop long");
-				if (String.IsNullOrEmpty(value))
-					throw new ArgumentException("Le code club ne peut pas etre vide");
 				this.code_club = value;
 			}
 		}
@@ -38,11 +36,6 @@ namespace SAE_201_BEAUNE
 		{
 			get { return this.num_federation; }
 			set {
-                if (String.IsNullOrEmpty(value))
-                    throw new ArgumentNullException("Vous devez saisir un numéro fédération valide");
-
-
-
                 this.num_federation = value; }
 		}
 		private string nom_coureur;
@@ -53,7 +46,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 50)
                     throw new ArgumentOutOfRangeException("Le nom coureur est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le nom coureur ne peut pas etre vide");
                 this.nom_coureur = value;
 			}
@@ -66,7 +59,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 100)
                     throw new ArgumentOutOfRangeException("Le lien est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le lien ne peut pas etre vide");
                 this.lien_photo = value;
 
@@ -80,7 +73,7 @@ namespace SAE_201_BEAUNE
 			set {
                 if (value.Length > 50)
                     throw new ArgumentOutOfRangeException("Le prenom est trop long");
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le prenom ne peut pas etre vide");
                 this.prenom_coureur = value;
             }
@@ -145,5 +138,12 @@ namespace SAE_201_BEAUNE
             this.Prenom_coureur = prenom_coureur;
             this.Portable = portable;
         }
-	}
+
+        public Coureur(int num_coureur, string code_club, string num_federation, string nom_coureur, string lien_photo, string prenom_coureur, string ville_coureur, string portable, string num_licence) : this(num_coureur, code_club, num_federation, nom_coureur, lien_photo, prenom_coureur)
+        {
+            Ville_coureur = ville_coureur;
+            Portable = portable;
+            Num_licence = num_licence;
+        }
+    }
 }

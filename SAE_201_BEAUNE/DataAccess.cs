@@ -50,9 +50,9 @@ namespace SAE_201_BEAUNE
         public bool IsConnected { get => isConnected; set => isConnected = value; }
         public bool ConnexionBD()
         {
-            strConnexion = "Server=srv-peda-new;port=5433;"
+            string strConnexion2 = "Server=srv-peda-new;port=5433;"
             + $"Database=sae201_marathon;Search Path=beaune;uid={Login};password={Password};";
-
+            strConnexion = $"Host=localhost;Username={Login};Password={Password};Database=sae201_marathon";
             try
             {
                 Connexion = new NpgsqlConnection();
@@ -64,7 +64,7 @@ namespace SAE_201_BEAUNE
             }
             catch (Exception e)
             {
-
+                Connexion = null;
                 MessageBox.Show("Votre mot de passe ou login est incorecte");
                 return false;   
 
