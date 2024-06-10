@@ -37,7 +37,7 @@
                         VerticalAlignment="Top"
                         RenderTransformOrigin="0.06,0.001"
                         Source="/img/Logo-Semi-Beaune.png" />
-                    <DataGrid
+                    <ComboBox
                         x:Name="dataCourse"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesCourses}" />

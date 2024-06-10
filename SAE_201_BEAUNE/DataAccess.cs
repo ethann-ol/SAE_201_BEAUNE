@@ -20,7 +20,7 @@ namespace SAE_201_BEAUNE
 
         private DataAccess()
         {
-            //ConnexionBD();
+            ConnexionBD();
         }
         /*
         public static Agent AgentConnecter
@@ -40,7 +40,7 @@ namespace SAE_201_BEAUNE
                 return instance;
             }
         }
-        public NpgsqlConnection? Connexion
+        public static NpgsqlConnection? Connexion
         {
             get;
             set;
