@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAE_201_BEAUNE
 {
-    public class Course
+    public class Course : ICloneable
 
     {
 		private int num_course;
@@ -16,9 +16,9 @@ namespace SAE_201_BEAUNE
 			get { return this.num_course; }
 			set { this.num_course = value; }
 		}
-		private int distance;
+		private double distance;
 
-		public int Distance
+		public double Distance
 		{
 			get { return this.distance; }
 			set { this.distance = value; }
@@ -36,9 +36,9 @@ namespace SAE_201_BEAUNE
 				this.heure_depart = value; }
 		}
 
-		private int prix_inscription;
+		private double prix_inscription;
 
-		public int Prix_inscription
+		public double Prix_inscription
 		{
 			get { return this.prix_inscription; }
 			set { this.prix_inscription = value; }
@@ -72,7 +72,7 @@ namespace SAE_201_BEAUNE
 		}
 	
 
-		public Course(int num_course, int distance, string heure_depart, int prix_inscription, string nom_course, DateTime date_course) 
+		public Course(int num_course, double distance, string heure_depart, double prix_inscription, string nom_course, DateTime date_course) 
 		{ 
 			this.Num_course = num_course;
 			this.Distance = distance;
@@ -83,8 +83,14 @@ namespace SAE_201_BEAUNE
 
 		}
 
+        public override string? ToString()
+        {
+            return Num_course + " " + Distance + " " + Heure_depart + " " + Prix_inscription + " " + Nom_course + " " + Date_course;
+        }
 
-
-
-	}
+        public object Clone()
+        {
+            return new Course(this.num_course, this.distance, this.heure_depart, this.prix_inscription, this.nom_course, this.date_course);
+        }
+    }
 }

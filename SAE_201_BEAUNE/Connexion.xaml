@@ -36,7 +36,7 @@
             <TextBox
                 x:Name="textID"
                 Margin="0,5,0,0"
-                Text="{Binding Login_agent, ValidatesOnExceptions=True}"
+                Text="{Binding , ValidatesOnExceptions=True}"
                 TextWrapping="Wrap" />
             <Label
                 x:Name="labMdp"
@@ -53,7 +53,8 @@
                 x:Name="butConnexion"
                 Margin="0,20,0,0"
                 Click="butConnexion_Click"
-                Content="Connexion" />
+                Content="Connexion"
+                IsDefault="True" />
 
         </StackPanel>
 

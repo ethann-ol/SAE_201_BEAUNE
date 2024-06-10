@@ -35,8 +35,6 @@ namespace SAE_201_BEAUNE
 
             this.AppConnexion = new Connexion(this);
             FenetreConnexion(true, AppConnexion);
-            ApplicationData data = new ApplicationData();
-            data.ReadCourse();
 
 
 
@@ -46,6 +44,7 @@ namespace SAE_201_BEAUNE
         {
             if (ouvrir)
             {
+                
                 appConnexion.Show();
                 this.Hide();
             }
@@ -53,6 +52,8 @@ namespace SAE_201_BEAUNE
             {
                 appConnexion.Hide();
                 this.Show();
+                data.ReadCourse();
+                data.ReadCoureur();
             }
         }
 

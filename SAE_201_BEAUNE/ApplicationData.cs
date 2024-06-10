@@ -27,7 +27,21 @@ namespace SAE_201_BEAUNE
         private ObservableCollection<Distance> lesDistances = new ObservableCollection<Distance>();
         private ObservableCollection<Course> lesCourses = new ObservableCollection<Course>();
         private ObservableCollection<Coureur> lesCoureurs = new ObservableCollection<Coureur>();
-        private NpgsqlConnection connexion = null;   // futur lien à la BD
+        private static string login;
+        private static string password;
+        public static string Login
+        {
+            get => login;
+            set
+            {
+                if (value.Length > 8)
+                {
+                    throw new ArgumentException("Login trop long");
+                }
+                login = value;
+            }
+        }
+        public static string Password { get => password; set => password = value; }
 
 
         public ObservableCollection<Course> LesCourses
@@ -52,19 +66,6 @@ namespace SAE_201_BEAUNE
             set
             {
                 this.lesCoureurs = value;
-            }
-        }
-
-        public NpgsqlConnection Connexion
-        {
-            get
-            {
-                return this.connexion;
-            }
-
-            set
-            {
-                this.connexion = value;
             }
         }
 
@@ -158,6 +159,7 @@ namespace SAE_201_BEAUNE
                 this.lesInscriptions2 = value;
             }
         }
+        /*
         private Agent agentConnecter;
 
         public Agent AgentConnecter
@@ -173,7 +175,7 @@ namespace SAE_201_BEAUNE
             set { connexionWin = value; }
         }
 
-
+        */
 
         public ApplicationData()
         {
@@ -181,38 +183,34 @@ namespace SAE_201_BEAUNE
 
         public bool TryConnexionBD(Agent agentConnecter)
         {
-            DataAccess.AgentConnecter = agentConnecter;
+            DataAccess.Login = Login;
+            DataAccess.Password = Password;
             return DataAccess.Instance.ConnexionBD();
         }
 
-        public void DeconnexionBD()
-        {
-            try
-            {
-                Connexion.Close();
-            }
-            catch (Exception e)
-            { Console.WriteLine("pb à la déconnexion : " + e); }
-        }
+        
         public int ReadCourse()
         {
-            this.LesCourses = new ObservableCollection<Course>();
-            String sql = "SELECT num_course, distance,heure_depart,prix_inscription, nom_course, date_course FROM Course";
+            LesCourses.Clear();
+            string sql = "SELECT num_course, distance, heure_depart, prix_inscription, nom_course, date_course FROM course";
             try
             {
                 
                 DataTable dataTable = DataAccess.Instance.GetData(sql);
                 foreach (DataRow res in dataTable.Rows)
                 {
-                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), int.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
-                        int.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_inscription"].ToString()));
+                    Course nouveau = new Course(int.Parse(res["num_course"].ToString()), double.Parse(res["distance"].ToString()), res["heure_depart"].ToString(),
+                        double.Parse(res["prix_inscription"].ToString()), res["nom_course"].ToString(), DateTime.Parse(res["date_course"].ToString()));
                     LesCourses.Add(nouveau);
+                    Console.WriteLine(nouveau);
                 }
+
                 return dataTable.Rows.Count;
             }
             catch (NpgsqlException e)
             { Console.WriteLine("pb de requete : " + e); return 0; }
         }
+       
         public int ReadCoureur()
         {
             this.LesCoureurs = new ObservableCollection<Coureur>();
